@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bondumani Art — Animating the Visual Arts for a Better Sierra Leone</title>
+<meta name="description" content="A Freetown studio painting Sierra Leone back to itself. Portraits, murals, fabric, children's classes and bamboo-village rest by Sahr Songu Mbriwa and Aishatu Jalloh." />
+<script type="module" src="/src/art.js"></script>
+<style>
+  :root{
+    --cream:#faf6e7;
+    --cream-2:#efe7cc;
+    --ink:#140a1f;
+    --purple:#4b1f7a;
+    --purple-deep:#2a0f4c;
+    --purple-hi:#7c3aed;
+    --yellow:#f5c518;
+    --yellow-deep:#e2a809;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+  .font-display{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 90,'WONK' 1;letter-spacing:-0.045em;line-height:0.85}
+  .font-script{font-family:'Instrument Serif',serif;font-style:italic;letter-spacing:-0.01em}
+  .font-mono{font-family:'Geist Mono',monospace;letter-spacing:0.05em;text-transform:uppercase}
+  .mega em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal}
+  /* grain */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity:0.09;mix-blend-mode:multiply;
+  }
+  .bg-paper{
+    background:
+      radial-gradient(900px 500px at 12% -10%, rgba(245,197,24,0.25), transparent 60%),
+      radial-gradient(900px 600px at 100% 110%, rgba(124,58,237,0.18), transparent 55%),
+      var(--cream);
+  }
+  /* page intro veil */
+  .intro{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at center, #7c3aed 0%, #2d1045 70%, #120720 100%);pointer-events:none}
+  /* marquee */
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .marquee{display:flex;gap:2.4rem;white-space:nowrap;animation:scroll 45s linear infinite}
+  @keyframes scrollRev{to{transform:translateX(50%)}}
+  .marquee-rev{display:flex;gap:2.4rem;white-space:nowrap;animation:scrollRev 55s linear infinite}
+  /* wave/curve title */
+  .mega{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 100,'WONK' 1;line-height:0.82;letter-spacing:-0.055em}
+  /* pill */
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
+    border:1px solid rgba(20,10,31,0.18);font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    background:rgba(255,255,255,0.45);backdrop-filter:blur(10px);
+  }
+  .dot{width:6px;height:6px;border-radius:999px;background:var(--yellow);box-shadow:0 0 0 3px rgba(245,197,24,0.25)}
+  /* button */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:16px 24px;border-radius:999px;
+    background:var(--ink);color:var(--cream);font-family:'Geist',sans-serif;font-weight:500;font-size:14px;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), background .3s ease;
+  }
+  .btn:hover{transform:translateY(-2px);background:var(--purple)}
+  .btn.yellow{background:var(--yellow);color:var(--ink)}
+  .btn.yellow:hover{background:var(--yellow-deep);color:var(--ink)}
+  /* float */
+  @keyframes float{0%,100%{transform:translate3d(0,0,0) rotate(var(--r,0deg))}50%{transform:translate3d(0,-14px,0) rotate(calc(var(--r,0deg) + 3deg))}}
+  .float{animation:float 6s ease-in-out infinite}
+  /* underline link */
+  .ulink{background-image:linear-gradient(var(--purple),var(--purple));background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%}
+  .ulink:hover{background-image:linear-gradient(var(--yellow),var(--yellow));background-size:100% 3px}
+  /* card hover */
+  .tile{transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease;will-change:transform}
+  .tile:hover{transform:translateY(-6px) rotate(-0.5deg)}
+  /* ticker-entry anim */
+  @keyframes riseIn{from{transform:translate3d(0,120%,0)}to{transform:translate3d(0,0,0)}}
+  .rise>span{display:inline-block}
+  .rise.active>span{animation:riseIn 1s cubic-bezier(.2,.8,.2,1) both}
+
+  /* image treatment */
+  .art-img{position:relative;overflow:hidden;border-radius:14px;background:#2a0f4c}
+  .art-img img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;filter:contrast(1.05) saturate(0.8);transition:transform .9s ease}
+  .art-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(42,15,76,0.15), rgba(42,15,76,0.55));pointer-events:none}
+  .art-img:hover img{transform:scale(1.05)}
+  /* hero sticker */
+  .sticker{
+    position:absolute;border-radius:999px;padding:10px 16px;background:var(--yellow);color:var(--ink);
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    box-shadow:0 10px 24px -10px rgba(245,197,24,0.6), inset 0 0 0 1px rgba(20,10,31,0.1);
+  }
+  /* splatter */
+  .splatter{position:absolute;filter:blur(42px);mix-blend-mode:multiply;opacity:0.55;pointer-events:none;border-radius:50%}
+
+  /* spinning label */
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spin-label{animation:spin 22s linear infinite;transform-origin:center}
+
+  /* reveal */
+  .reveal-wrap{overflow:hidden}
+  .reveal-wrap .line{display:block;transform:translateY(120%)}
+  .reveal-wrap.in .line{transform:translateY(0);transition:transform 1.1s cubic-bezier(.2,.85,.2,1)}
+
+  .section-pad{padding:64px 20px}
+  @media (min-width:640px){.section-pad{padding:80px 24px}}
+  @media (min-width:768px){.section-pad{padding:120px 56px}}
+
+  /* gallery mason-ish */
+  .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .g1{grid-column:span 5;aspect-ratio:4/5}
+  .g2{grid-column:span 4;aspect-ratio:3/4;margin-top:48px}
+  .g3{grid-column:span 3;aspect-ratio:4/5}
+  .g4{grid-column:span 4;aspect-ratio:5/4;margin-top:24px}
+  .g5{grid-column:span 4;aspect-ratio:1/1}
+  .g6{grid-column:span 4;aspect-ratio:3/4;margin-top:-40px}
+  @media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);gap:10px}.g1,.g2,.g3,.g4,.g5,.g6{grid-column:span 1;margin-top:0}}
+  @media (max-width:420px){.gallery{grid-template-columns:1fr}}
+
+  /* bounce label */
+  .bubble-label{position:relative;display:inline-block;padding:6px 14px;background:var(--yellow);color:var(--ink);border-radius:999px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase}
+  .bubble-label::after{content:'';position:absolute;bottom:-5px;left:18px;width:10px;height:10px;background:var(--yellow);transform:rotate(45deg)}
+
+  /* scroll tick word flip */
+  .flipper{display:inline-flex;vertical-align:baseline;height:1em;overflow:hidden;position:relative;min-width:6ch}
+  .flipper ul{margin:0;padding:0;list-style:none;animation:flip 9s infinite ease-in-out}
+  .flipper li{height:1em;line-height:1em}
+  @keyframes flip{0%,14%{transform:translateY(0)}20%,34%{transform:translateY(-100%)}40%,54%{transform:translateY(-200%)}60%,74%{transform:translateY(-300%)}80%,94%{transform:translateY(-400%)}100%{transform:translateY(-500%)}}
+
+  /* hand-drawn divider */
+  .divider{height:32px;width:100%}
+  .underline-draw{position:relative}
+  .underline-draw svg{position:absolute;bottom:-10px;left:0;width:100%}
+
+  /* footer */
+  .foot{background:var(--purple-deep);color:#efe7cc}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+
+  /* Hero portrait frame */
+  .portrait-frame{
+    position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(160deg,#3c1463,#6b2ab0 55%,#8a3ec9);
+    box-shadow:0 40px 80px -30px rgba(75,31,122,0.6), 0 8px 24px -10px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-paper">
+
+  <!-- Intro veil -->
+  <div id="intro" class="intro"></div>
+
+  <!-- Top nav -->
+  <header class="flex items-center justify-between gap-3 px-4 sm:px-6 md:px-10 pt-5 md:pt-6">
+    <a href="../" class="flex items-center gap-3 group min-w-0">
+      <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style="background:var(--ink);color:var(--yellow)">
+        <span class="font-display text-lg" style="line-height:1">B</span>
+      </div>
+      <div class="leading-tight min-w-0">
+        <div class="font-display text-base sm:text-lg truncate">Bondumani <em class="font-script" style="color:var(--purple)">Art</em></div>
+        <div class="font-mono text-[9px] opacity-60 truncate">← back to the worlds</div>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-6 font-mono text-[11px]">
+      <a class="ulink" href="#story">story</a>
+      <a class="ulink" href="#work">work</a>
+      <a class="ulink" href="#classes">classes</a>
+      <a class="ulink" href="#bamboo">bamboo</a>
+      <a class="ulink" href="#press">press</a>
+      <a class="ulink" href="#visit">visit</a>
+    </nav>
+
+    <a href="#commission" class="btn yellow shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
+      <span class="hidden sm:inline">Commission a piece</span>
+      <span class="sm:hidden">Commission</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative px-4 sm:px-6 md:px-10 pt-10 sm:pt-16 md:pt-24 pb-16 sm:pb-24 overflow-hidden">
+
+    <!-- splats -->
+    <div class="splatter hidden sm:block" style="width:520px;height:520px;background:#f5c518;top:-160px;left:-160px"></div>
+    <div class="splatter hidden sm:block" style="width:460px;height:460px;background:#c084fc;bottom:-180px;right:-160px;opacity:0.4"></div>
+
+    <div class="max-w-7xl mx-auto relative">
+      <!-- top row badges -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 sm:mb-10">
+        <span class="pill"><span class="dot"></span> Studio · Mon–Sat · 9–8</span>
+        <span class="pill hidden sm:inline-flex">Peninsular Road · Big Water Village</span>
+        <span class="pill" style="background:var(--yellow);border-color:rgba(20,10,31,0.18)">As seen on CNN · 2023</span>
+      </div>
+
+      <!-- Big animated heading -->
+      <h1 class="mega text-[clamp(2.8rem,15vw,14rem)] break-words" id="hero-title">
+        <span class="block reveal-wrap"><span class="line">we paint</span></span>
+        <span class="block reveal-wrap"><span class="line">Sierra Leone</span></span>
+        <span class="block reveal-wrap"><span class="line"><em style="color:var(--purple)">back</em> to itself.</span></span>
+      </h1>
+
+      <div class="grid md:grid-cols-12 gap-8 md:gap-8 mt-10 sm:mt-12">
+        <div class="md:col-span-6 md:col-start-1 order-2 md:order-1">
+          <p class="font-script text-xl sm:text-2xl md:text-3xl opacity-90 leading-snug">
+            Bondumani <em>Art</em> is a collective in Freetown turning oil, fabric, wall
+            and pencil into proof that a visual-arts life is a livable, lovable future.
+          </p>
+
+          <div class="flex flex-wrap gap-3 mt-6 sm:mt-8">
+            <a href="#commission" class="btn">Start a commission
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#work" class="btn" style="background:transparent;color:var(--ink);border:1px solid rgba(20,10,31,0.2)">See our work</a>
+          </div>
+        </div>
+
+        <!-- portrait tile -->
+        <div class="md:col-span-5 md:col-start-8 relative portrait-frame float order-1 md:order-2 mt-4 md:mt-0" style="--r:-2deg">
+          <img src="https://placehold.co/600x760/4b1f7a/f5c518?text=Sahr+Songu+Mbriwa&font=lora" alt="Founder Sahr Songu Mbriwa in studio" style="display:block;width:100%;height:auto;mix-blend-mode:luminosity;opacity:0.85"/>
+          <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(42,15,76,0.15), rgba(42,15,76,0.5))"></div>
+
+          <!-- stickers -->
+          <div class="sticker !text-[8px] sm:!text-[10px] !px-2 sm:!px-4 !py-1 sm:!py-2" style="top:12px;left:12px;transform:rotate(-6deg)">hyperrealism / 2012 →</div>
+          <div class="sticker !text-[8px] sm:!text-[10px] !px-2 sm:!px-4 !py-1 sm:!py-2" style="bottom:14px;right:12px;transform:rotate(4deg);background:#fff">unveiled by the US ambassador</div>
+
+          <!-- spinning stamp -->
+          <div class="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 w-20 h-20 sm:w-28 sm:h-28">
+            <svg class="spin-label w-full h-full" viewBox="0 0 120 120">
+              <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+              <circle cx="60" cy="60" r="58" fill="#f5c518" stroke="#140a1f" stroke-width="1"/>
+              <text font-family="Geist Mono" font-size="9.5" letter-spacing="3" fill="#140a1f"><textPath href="#circ">BONDUMANI · ART · FREETOWN · SIERRA LEONE · EST. 2020 ·  </textPath></text>
+              <text x="60" y="65" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="22" fill="#140a1f">art.</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flipper strapline -->
+      <div class="mt-12 sm:mt-16 flex items-center gap-2 sm:gap-4 flex-wrap">
+        <span class="font-mono text-[10px] sm:text-[11px] opacity-60">we do →</span>
+        <span class="font-display text-2xl sm:text-3xl md:text-5xl">
+          <em class="font-script" style="color:var(--purple)">
+            <span class="flipper">
+              <ul>
+                <li>portraits.</li>
+                <li>murals.</li>
+                <li>fabric.</li>
+                <li>face art.</li>
+                <li>classes.</li>
+                <li>portraits.</li>
+              </ul>
+            </span>
+          </em>
+        </span>
+        <span class="font-display text-2xl sm:text-3xl md:text-5xl">for anyone who wants to be seen.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="py-4 sm:py-5 overflow-hidden" style="background:var(--ink);color:var(--yellow)">
+    <div class="marquee font-display text-xl sm:text-2xl md:text-4xl">
+      <div class="flex gap-12 items-center">
+        <span>Freetown</span><span>★</span>
+        <span class="font-script italic" style="color:var(--cream)">animating the visual arts</span><span>★</span>
+        <span>Peninsular Road</span><span>★</span>
+        <span class="font-script italic" style="color:var(--cream)">for a better Sierra Leone</span><span>★</span>
+        <span>Bondumani</span><span>★</span>
+      </div>
+      <div class="flex gap-12 items-center" aria-hidden="true">
+        <span>Freetown</span><span>★</span>
+        <span class="font-script italic" style="color:var(--cream)">animating the visual arts</span><span>★</span>
+        <span>Peninsular Road</span><span>★</span>
+        <span class="font-script italic" style="color:var(--cream)">for a better Sierra Leone</span><span>★</span>
+        <span>Bondumani</span><span>★</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story" class="section-pad">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 md:gap-10">
+      <div class="md:col-span-4">
+        <div class="bubble-label">01 · Our Story</div>
+        <h2 class="mega text-[clamp(2.2rem,5.5vw,4rem)] mt-5 sm:mt-6">A studio born from <em style="color:var(--purple)">stubborn</em> belief.</h2>
+      </div>
+      <div class="md:col-span-7 md:col-start-6">
+        <p class="text-lg sm:text-xl md:text-2xl font-script leading-snug opacity-85 mb-5 sm:mb-6">In a city where "be a doctor or a lawyer" is
+          still the loudest advice given to children, two Sierra Leonean painters
+          decided to be neither.</p>
+        <p class="text-sm sm:text-base md:text-lg leading-relaxed opacity-80">
+          Bondumani Art was founded in Freetown by <a class="ulink" href="#founders">Sahr Songu Mbriwa</a> — an internationally
+          collected hyperrealistic oil painter — and <a class="ulink" href="#founders">Aishatu Jalloh</a>, a
+          full-time visual artist with a sharp eye for colour and a softer
+          one for stories. Together they built a place where fabric gets
+          painted like canvas, children learn that brushes are professional
+          tools, and walls in Freetown stop asking to be ignored.
+        </p>
+        <p class="text-base md:text-lg leading-relaxed opacity-80 mt-4">
+          We are a gallery, a studio, a commission house, a classroom, and
+          occasionally — when the bamboo village fills up — a quiet place to sleep.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-10 pt-6 sm:pt-8 border-t" style="border-color:rgba(20,10,31,0.12)">
+          <div>
+            <div class="font-display text-2xl sm:text-4xl" style="color:var(--purple)">2020</div>
+            <div class="font-mono text-[9px] sm:text-[10px] opacity-60 mt-1">first exhibition<br/>sea food complex</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl sm:text-4xl" style="color:var(--purple)">3×</div>
+            <div class="font-mono text-[9px] sm:text-[10px] opacity-60 mt-1">ambassador<br/>unveilings</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl sm:text-4xl" style="color:var(--purple)">100+</div>
+            <div class="font-mono text-[9px] sm:text-[10px] opacity-60 mt-1">commissions<br/>& counting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO (bento grid) -->
+  <style>
+    html,body{overflow-x:hidden;max-width:100%}
+    .bento{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      grid-auto-rows:160px;
+      gap:12px;
+    }
+    .bento-card{
+      position:relative;overflow:hidden;
+      border-radius:18px;padding:18px;
+      display:flex;flex-direction:column;justify-content:space-between;
+      transition:transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .bento-card:hover{transform:translateY(-4px)}
+    .bento-card .num{font-family:'Geist Mono Variable','Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.75}
+    .bento-card .tag{font-family:'Geist Mono Variable','Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55}
+    .bento-card h3{font-family:'Fraunces Variable','Fraunces',serif;font-variation-settings:'SOFT' 100,'WONK' 1;letter-spacing:-0.04em;line-height:0.95}
+    .bento-card h3 em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal}
+    .bento-card p{font-size:12px;line-height:1.45;opacity:0.82;max-width:34ch}
+
+    /* Size variations */
+    .b-hero{grid-column:span 7;grid-row:span 2}
+    .b-tall{grid-column:span 5;grid-row:span 2}
+    .b-wide{grid-column:span 7;grid-row:span 1}
+    .b-md  {grid-column:span 5;grid-row:span 1}
+    .b-sq  {grid-column:span 4;grid-row:span 1}
+    .b-lg  {grid-column:span 8;grid-row:span 1}
+    .b-full{grid-column:span 12;grid-row:span 1}
+
+    /* Decorative bento details */
+    .bento-deco{position:absolute;pointer-events:none;opacity:0.5;mix-blend-mode:screen}
+    .bento-splat{position:absolute;filter:blur(40px);border-radius:50%;pointer-events:none;opacity:0.55;mix-blend-mode:screen}
+
+    @media (max-width:900px){
+      .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:10px}
+      .b-hero,.b-tall,.b-wide,.b-md,.b-sq,.b-lg,.b-full{grid-column:span 4;grid-row:span 1}
+      .b-hero{grid-row:span 2}
+    }
+    @media (max-width:520px){
+      .bento{grid-auto-rows:140px}
+      .bento-card{padding:16px;border-radius:16px}
+      .bento-card p{font-size:11px}
+    }
+  </style>
+
+  <section id="work" class="section-pad" style="background:var(--ink);color:var(--cream)">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between flex-wrap gap-6 mb-14">
+        <div>
+          <div class="bubble-label">02 · What we do</div>
+          <h2 class="mega text-[clamp(2.4rem,7vw,6rem)] mt-6" style="color:var(--cream)">Seven <em class="font-script" style="color:var(--yellow)">obsessions</em>.</h2>
+        </div>
+        <p class="max-w-md opacity-75 text-base md:text-lg">Some we've been doing for a decade. Some started when a child asked for a portrait of their grandmother. All of them move.</p>
+      </div>
+
+      <div class="bento">
+
+        <!-- 01 · HERO card: Portrait painting (big) -->
+        <div class="bento-card b-hero" style="background:linear-gradient(145deg,#4b1f7a 0%,#6b2ab0 55%,#8a3ec9 100%);color:#fbeeca">
+          <div class="bento-splat" style="width:340px;height:340px;background:#f5c518;top:-120px;right:-120px"></div>
+          <svg class="bento-deco" style="bottom:-20px;left:-10px" width="220" height="160" viewBox="0 0 220 160" fill="none"><path d="M10 130 Q80 70 210 130" stroke="rgba(245,197,24,0.6)" stroke-width="16" stroke-linecap="round" fill="none"/></svg>
+          <div class="flex items-center justify-between relative">
+            <div class="num">01 · oil</div>
+            <div class="tag">commission / framed</div>
+          </div>
+          <div class="relative">
+            <h3 style="font-size:clamp(1.8rem,3.6vw,3rem)">Portrait <em style="color:#f5c518">painting</em>.</h3>
+            <p class="mt-2">Hyperrealistic oil commissions — from weddings to memorials, sized to your wall and loaded with likeness.</p>
+          </div>
+        </div>
+
+        <!-- 02 · still life (tall, yellow) -->
+        <div class="bento-card b-md" style="background:var(--yellow);color:var(--ink)">
+          <div class="flex items-center justify-between">
+            <div class="num" style="opacity:0.7">02 · still</div>
+            <div class="tag" style="opacity:0.6">graphite / pastel</div>
+          </div>
+          <div>
+            <h3 style="font-size:clamp(1.4rem,2.4vw,1.9rem)">Still life <em>drawing</em>.</h3>
+            <p class="mt-2" style="opacity:0.82">Studies that take Freetown's everyday objects seriously.</p>
+          </div>
+        </div>
+
+        <!-- 03 · face painting (md dark) -->
+        <div class="bento-card b-md" style="background:#2a0f4c;color:#fbeeca;border:1px solid rgba(255,255,255,0.08)">
+          <div class="bento-splat" style="width:200px;height:200px;background:#c084fc;bottom:-80px;left:-60px;opacity:0.35"></div>
+          <div class="flex items-center justify-between relative">
+            <div class="num">03 · face</div>
+            <div class="tag">festival / parade</div>
+          </div>
+          <div class="relative">
+            <h3 style="font-size:clamp(1.4rem,2.4vw,1.9rem)">Face <em style="color:#f5c518">painting</em>.</h3>
+            <p class="mt-2">Bold pigment that stays put and photographs sharp under Freetown sun.</p>
+          </div>
+        </div>
+
+        <!-- 04 · mural (wide, violet) -->
+        <div class="bento-card b-lg" style="background:linear-gradient(120deg,#6b2ab0 0%,#4b1f7a 100%);color:#fbeeca;border:1px solid rgba(255,255,255,0.1)">
+          <svg class="bento-deco" style="top:10px;right:20px" width="120" height="60" viewBox="0 0 120 60" fill="none"><path d="M4 40 Q40 10 116 40" stroke="rgba(245,197,24,0.55)" stroke-width="10" stroke-linecap="round" fill="none"/></svg>
+          <div class="flex items-center justify-between">
+            <div class="num">05 · wall</div>
+            <div class="tag">public / private / hotel</div>
+          </div>
+          <div>
+            <h3 style="font-size:clamp(1.6rem,2.8vw,2.2rem)">Mural <em style="color:#f5c518">painting</em>.</h3>
+            <p class="mt-2 max-w-lg">Public walls, private compounds, hotel exteriors — stories sized up for the street.</p>
+          </div>
+        </div>
+
+        <!-- 05 · fabric painting (square, cream) -->
+        <div class="bento-card b-sq" style="background:var(--cream);color:var(--ink)">
+          <div class="flex items-center justify-between">
+            <div class="num" style="opacity:0.65">04 · cloth</div>
+            <div class="tag" style="opacity:0.55">wearable / hand</div>
+          </div>
+          <div>
+            <h3 style="font-size:clamp(1.2rem,2vw,1.7rem)">Fabric <em>painting</em>.</h3>
+            <p class="mt-2" style="opacity:0.8;font-size:12px">Clothing and cloth painted by hand to live in sun, salt and Atlantic air.</p>
+          </div>
+        </div>
+
+        <!-- 06 · kids (full width, yellow gradient, featured) -->
+        <div class="bento-card b-full" style="background:linear-gradient(100deg,#f5c518 0%,#e2a809 60%,#4b1f7a 100%);color:var(--ink);grid-row:span 1">
+          <div class="bento-splat" style="width:260px;height:260px;background:#fff;top:-100px;right:20%;opacity:0.3"></div>
+          <div class="flex items-start justify-between relative">
+            <div>
+              <div class="num">06 · kids</div>
+              <h3 class="mt-3" style="font-size:clamp(1.6rem,3vw,2.4rem)">Children's <em style="color:#fbeeca">art classes</em>.</h3>
+              <p class="mt-2 max-w-md" style="opacity:0.85">Our beating heart — training the next generation of West-African painters, one Saturday at a time.</p>
+            </div>
+            <div class="hidden md:flex flex-col items-end gap-1 text-right">
+              <span class="tag" style="opacity:0.7">saturdays</span>
+              <span class="font-display" style="color:#fbeeca;font-size:2.4rem;line-height:1">6 — 17</span>
+              <span class="tag" style="opacity:0.7">ages welcome</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section-pad">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between flex-wrap gap-4 sm:gap-6 mb-8 sm:mb-10">
+        <div>
+          <div class="bubble-label">03 · Selected work</div>
+          <h2 class="mega text-[clamp(2.2rem,7vw,6rem)] mt-5 sm:mt-6 break-words">A small <em class="font-script" style="color:var(--purple)">loud</em> gallery.</h2>
+        </div>
+        <a class="ulink font-mono text-xs" href="#commission">request full portfolio →</a>
+      </div>
+
+      <div class="gallery">
+        <div class="g1 art-img"><img src="https://placehold.co/800x1000/3a1362/f5c518?text=Portrait+No.+IV&font=lora"/></div>
+        <div class="g2 art-img"><img src="https://placehold.co/700x900/6b2ab0/ffffff?text=Mother+%26+Calabash&font=lora"/></div>
+        <div class="g3 art-img"><img src="https://placehold.co/600x900/2a0f4c/f5c518?text=Mural+Study&font=lora"/></div>
+        <div class="g4 art-img"><img src="https://placehold.co/900x720/8a3ec9/ffffff?text=Cloth+Study+VII&font=lora"/></div>
+        <div class="g5 art-img"><img src="https://placehold.co/800x800/f5c518/140a1f?text=Face+Paint+Festival&font=lora"/></div>
+        <div class="g6 art-img"><img src="https://placehold.co/700x900/140a1f/f5c518?text=Self+Portrait&font=lora"/></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDERS -->
+  <section id="founders" class="section-pad" style="background:var(--cream-2)">
+    <div class="max-w-7xl mx-auto">
+      <div class="bubble-label">04 · The founders</div>
+      <h2 class="mega text-[clamp(2.2rem,7vw,6rem)] mt-5 sm:mt-6 mb-10 sm:mb-14 break-words">Two painters, <em class="font-script" style="color:var(--purple)">one stubborn</em> roof.</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <!-- Sahr -->
+        <article class="rounded-2xl overflow-hidden relative" style="background:var(--purple);color:var(--cream)">
+          <div class="relative" style="aspect-ratio:4/3">
+            <img src="https://placehold.co/900x680/4b1f7a/f5c518?text=Sahr+in+studio&font=lora" alt="Sahr Songu Mbriwa" style="width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:0.85"/>
+            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 30%,rgba(42,15,76,0.7))"></div>
+            <div class="absolute bottom-5 left-5 font-mono text-[10px] opacity-80">co-founder · hyperrealism</div>
+            <div class="absolute top-5 right-5">
+              <span class="sticker" style="transform:rotate(4deg)">featured · CNN · 2023</span>
+            </div>
+          </div>
+          <div class="p-5 sm:p-7">
+            <h3 class="font-display text-3xl sm:text-4xl">Sahr Songu <em class="font-script" style="color:var(--yellow)">Mbriwa</em></h3>
+            <p class="opacity-85 mt-3 text-sm sm:text-base leading-relaxed">
+              Internationally collected oil painter. Works unveiled by
+              the US Ambassador to Sierra Leone and the Sierra Leonean
+              Ambassador to the US. A CNN feature (March 2023) called
+              him one of West Africa's pioneers challenging the idea
+              that art can't feed a family.
+            </p>
+            <a class="ulink font-mono text-[11px] mt-5 inline-block" href="mailto:SahrSongu1@gmail.com">SahrSongu1@gmail.com →</a>
+          </div>
+        </article>
+
+        <!-- Aishatu -->
+        <article class="rounded-2xl overflow-hidden relative" style="background:var(--yellow);color:var(--ink)">
+          <div class="relative" style="aspect-ratio:4/3">
+            <img src="https://placehold.co/900x680/f5c518/4b1f7a?text=Aishatu+painting&font=lora" alt="Aishatu Jalloh" style="width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;opacity:0.9"/>
+            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 40%,rgba(245,197,24,0.6))"></div>
+            <div class="absolute bottom-5 left-5 font-mono text-[10px] opacity-80">co-founder · full-time artist</div>
+            <div class="absolute top-5 right-5">
+              <span class="sticker" style="background:#140a1f;color:var(--yellow);transform:rotate(-5deg)">@bondumani_art</span>
+            </div>
+          </div>
+          <div class="p-5 sm:p-7">
+            <h3 class="font-display text-3xl sm:text-4xl">Aishatu <em class="font-script" style="color:var(--purple)">Jalloh</em></h3>
+            <p class="opacity-85 mt-3 text-base leading-relaxed font-script text-lg sm:text-xl">
+              "If you have a talent and passion for anything follow your heart. Do what you love and don't look down on yourself. No matter how many times people try to put you down keep pushing and one day you will reap the benefits of your hard work."
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASSES -->
+  <section id="classes" class="section-pad relative overflow-hidden">
+    <div class="splatter hidden sm:block" style="width:520px;height:520px;background:#c084fc;top:-140px;right:-160px"></div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 md:gap-10 items-center relative">
+      <div class="md:col-span-5 md:col-start-1">
+        <div class="bubble-label">05 · Classes</div>
+        <h2 class="mega text-[clamp(2.4rem,7vw,5.4rem)] mt-5 sm:mt-6">Start them <em class="font-script" style="color:var(--purple)">early</em>.</h2>
+        <p class="text-base sm:text-lg opacity-80 mt-5 sm:mt-6 max-w-md">Saturdays belong to the children. We've trained dozens of Freetown kids in still life, portraiture, colour theory and confidence — building toward a full Bondumani Art School.</p>
+        <div class="flex flex-wrap gap-3 mt-6 sm:mt-8">
+          <a href="#visit" class="btn">Enrol a child</a>
+          <a href="#commission" class="btn" style="background:var(--yellow);color:var(--ink)">Sponsor a class</a>
+        </div>
+      </div>
+      <div class="md:col-span-6 md:col-start-7 relative mt-10 md:mt-0">
+        <div class="art-img" style="aspect-ratio:5/6"><img src="https://placehold.co/800x960/4b1f7a/f5c518?text=Saturday+class&font=lora"/></div>
+        <div class="sticker !text-[9px] sm:!text-[10px]" style="top:14px;left:8px;transform:rotate(-8deg);background:#fff">free taster · 1st saturday</div>
+        <div class="sticker !text-[9px] sm:!text-[10px]" style="bottom:16px;right:8px;transform:rotate(6deg)">ages 6 – 17</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAMBOO / RESORT CONNECTION -->
+  <section id="bamboo" class="section-pad" style="background:var(--purple);color:var(--cream);position:relative;overflow:hidden">
+    <div class="splatter hidden sm:block" style="width:620px;height:620px;background:#f5c518;top:-180px;left:-180px;opacity:0.35"></div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 md:gap-10 items-center relative">
+      <div class="md:col-span-7 md:col-start-1">
+        <div class="bubble-label" style="background:var(--yellow)">06 · The bamboo side</div>
+        <h2 class="mega text-[clamp(2.4rem,7vw,5.6rem)] mt-5 sm:mt-6" style="color:var(--cream)">
+          Sleep where the <em class="font-script" style="color:var(--yellow)">paintings</em> sleep.
+        </h2>
+        <p class="text-base sm:text-lg opacity-85 mt-5 sm:mt-6 max-w-xl">The same compound that makes the art runs a small bamboo village — standard rooms, a signature bamboo relaxing massage experience, and a reception desk that never closes. Two worlds, one gate.</p>
+
+        <a href="../resort/" class="btn yellow mt-6 sm:mt-8">
+          Enter the resort
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="md:col-span-4 md:col-start-9 mt-8 md:mt-0">
+        <div class="rounded-2xl overflow-hidden relative" style="aspect-ratio:3/4">
+          <img src="https://placehold.co/600x800/1c4733/ffffff?text=Bamboo+Village&font=lora" style="width:100%;height:100%;object-fit:cover"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AS SEEN ON -->
+  <section id="press" class="py-10 sm:py-14 overflow-hidden" style="background:var(--cream)">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+      <div class="flex items-baseline justify-between flex-wrap gap-2 mb-6 sm:mb-8">
+        <span class="font-mono text-[11px] opacity-60">07 · As seen on</span>
+        <span class="font-script text-lg sm:text-xl opacity-70">the press noticed.</span>
+      </div>
+    </div>
+    <div class="marquee font-display text-2xl sm:text-3xl md:text-5xl">
+      <div class="flex gap-12 items-center">
+        <span>CNN</span><span class="font-script text-xl" style="color:var(--purple)">march 2023 feature</span><span>✶</span>
+        <span>AYV TV</span><span class="font-script text-xl" style="color:var(--purple)">salon kontri pot</span><span>✶</span>
+        <span>Poda-Poda Stories</span><span class="font-script text-xl" style="color:var(--purple)">creative renaissance</span><span>✶</span>
+        <span>Eventbrite D.C.</span><span class="font-script text-xl" style="color:var(--purple)">washington 2025</span><span>✶</span>
+        <span>Monuments & Relics Commission</span><span>✶</span>
+      </div>
+      <div class="flex gap-12 items-center" aria-hidden="true">
+        <span>CNN</span><span class="font-script text-xl" style="color:var(--purple)">march 2023 feature</span><span>✶</span>
+        <span>AYV TV</span><span class="font-script text-xl" style="color:var(--purple)">salon kontri pot</span><span>✶</span>
+        <span>Poda-Poda Stories</span><span class="font-script text-xl" style="color:var(--purple)">creative renaissance</span><span>✶</span>
+        <span>Eventbrite D.C.</span><span class="font-script text-xl" style="color:var(--purple)">washington 2025</span><span>✶</span>
+        <span>Monuments & Relics Commission</span><span>✶</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMISSION CTA -->
+  <section id="commission" class="section-pad relative overflow-hidden">
+    <div class="splatter hidden sm:block" style="width:620px;height:620px;background:#f5c518;top:-180px;right:-160px"></div>
+    <div class="splatter hidden sm:block" style="width:420px;height:420px;background:#c084fc;bottom:-140px;left:-140px"></div>
+    <div class="max-w-5xl mx-auto text-center relative">
+      <div class="bubble-label">08 · Start a piece</div>
+      <h2 class="mega text-[clamp(2.6rem,10vw,9rem)] mt-5 sm:mt-6 break-words">Commission <em class="font-script" style="color:var(--purple)">yours</em>.</h2>
+      <p class="font-script text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mt-5 sm:mt-6 opacity-85">Tell us about the person, the wall, the wedding, the child, the fabric. We'll tell you the medium, the price, and the timeline.</p>
+
+      <div class="flex flex-wrap gap-3 justify-center mt-8 sm:mt-10">
+        <a class="btn yellow" href="mailto:Bondumaniart20@gmail.com">Email the studio</a>
+        <a class="btn" href="tel:+23276403799">+232 76 403799</a>
+        <a class="btn" href="#visit" style="background:transparent;color:var(--ink);border:1px solid rgba(20,10,31,0.25)">Come visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT / FOOTER -->
+  <footer id="visit" class="foot section-pad">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 md:gap-10">
+      <div class="md:col-span-6">
+        <div class="font-mono text-[10px] opacity-70">09 · Visit</div>
+        <h2 class="mega text-[clamp(2.4rem,7vw,5rem)] mt-3 sm:mt-4" style="color:var(--yellow)">Peninsular Road.</h2>
+        <p class="max-w-md mt-5 sm:mt-6 opacity-80 text-sm sm:text-base">Big Water Village, Freetown, Sierra Leone. Park under the mango. Ring the bell. Ask for Sahr or Aishatu.</p>
+        <div class="grid grid-cols-2 gap-5 sm:gap-6 mt-8 sm:mt-10 font-mono text-[11px] opacity-80">
+          <div>
+            <div class="opacity-60 mb-1">studio hours</div>
+            <div>Mon – Sat · 9am – 8pm</div>
+          </div>
+          <div>
+            <div class="opacity-60 mb-1">reception</div>
+            <div>24 / 7</div>
+          </div>
+          <div>
+            <div class="opacity-60 mb-1">phone</div>
+            <a class="ulink" href="tel:+23276403799">+232 76 403799</a>
+          </div>
+          <div>
+            <div class="opacity-60 mb-1">email</div>
+            <a class="ulink break-all" href="mailto:Bondumaniart20@gmail.com">Bondumaniart20@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-5 md:col-start-8">
+        <div class="rounded-2xl overflow-hidden relative" style="background:#140a1f;aspect-ratio:4/3">
+          <img src="https://placehold.co/900x680/1c4733/f5c518?text=Map+%C2%B7+Big+Water+Village&font=lora" style="width:100%;height:100%;object-fit:cover;opacity:0.6"/>
+          <div class="absolute inset-0 p-5 sm:p-6 flex flex-col justify-end">
+            <div class="font-display text-2xl sm:text-3xl" style="color:var(--yellow)">Map →</div>
+            <a class="font-mono text-[11px] underline mt-2" href="https://maps.google.com/?q=Peninsular+Road+Big+Water+Village+Freetown" target="_blank" rel="noopener">open in google maps</a>
+          </div>
+        </div>
+        <div class="flex gap-2 sm:gap-3 mt-5 sm:mt-6 flex-wrap">
+          <a class="pill" style="background:transparent;border-color:rgba(245,197,24,0.35);color:var(--cream)" href="https://instagram.com/bondumani_art" target="_blank" rel="noopener">@bondumani_art</a>
+          <a class="pill" style="background:transparent;border-color:rgba(245,197,24,0.35);color:var(--cream)" href="../">← back to Bondumani</a>
+          <a class="pill" style="background:transparent;border-color:rgba(245,197,24,0.35);color:var(--cream)" href="../resort/">visit the resort →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-16 pt-6 border-t flex flex-wrap gap-4 items-center justify-between font-mono text-[10px] opacity-60" style="border-color:rgba(245,197,24,0.2)">
+      <div>© Bondumani Art · Freetown, Sierra Leone</div>
+      <div>site made with care · 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
