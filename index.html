@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Bondumani — Art & Resort · Freetown, Sierra Leone</title>
 <meta name="description" content="A living collective of art and hospitality on the Sierra Leonean peninsula. Choose your world." />
+<link rel="icon" href="/logo.png" />
 <script type="module" src="/src/gateway.js"></script>
 <style>
   :root{
@@ -199,6 +200,11 @@
           <div class="glow"></div>
           <div class="ring"></div>
 
+          <!-- mural photo layer -->
+          <div class="layer" style="position:absolute;inset:0;--d:-30">
+            <img src="/cabin-murals.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.35;mix-blend-mode:luminosity"/>
+          </div>
+
           <!-- painterly blobs -->
           <div class="blob layer" style="width:340px;height:340px;background:#f5c518;top:-90px;right:-80px;--d:40"></div>
           <div class="blob layer" style="width:260px;height:260px;background:#c084fc;bottom:-60px;left:-40px;--d:-30"></div>
@@ -238,15 +244,21 @@
           </div>
         </a>
 
-        <!-- RESORT CARD -->
-        <a href="resort/" class="card resort-card group" data-dest="resort" aria-label="Enter Bondumani Resort">
+        <!-- BAMBOO VILLAGE CARD -->
+        <a href="resort/" class="card resort-card group" data-dest="resort" aria-label="Enter Bondumani Bamboo Village">
           <div class="glow"></div>
           <div class="ring"></div>
 
-          <div class="blob layer" style="width:320px;height:320px;background:#a7f3d0;top:-70px;left:-90px;--d:40"></div>
-          <div class="blob layer" style="width:260px;height:260px;background:#f5ebd0;bottom:-40px;right:-40px;--d:-30"></div>
+          <!-- river photo layer -->
+          <div class="layer" style="position:absolute;inset:0;--d:-30">
+            <img src="/village-evening.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.55;mix-blend-mode:luminosity"/>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(160deg, rgba(29,53,36,0.5) 0%, rgba(58,90,63,0.55) 55%, rgba(107,74,44,0.45) 100%);pointer-events:none"></div>
 
-          <svg class="absolute inset-0 w-full h-full layer" style="--d:-20" viewBox="0 0 400 500" preserveAspectRatio="none">
+          <div class="blob layer" style="width:320px;height:320px;background:#c9d7b8;top:-70px;left:-90px;--d:40"></div>
+          <div class="blob layer" style="width:260px;height:260px;background:#a47c52;bottom:-40px;right:-40px;--d:-30;opacity:0.5"></div>
+
+          <svg class="absolute inset-0 w-full h-full layer" style="--d:-20;z-index:1" viewBox="0 0 400 500" preserveAspectRatio="none">
             <g stroke="rgba(255,255,255,0.35)" fill="none" stroke-linecap="round">
               <path d="M40 500 C40 320 20 260 60 200 S 120 100 60 40" stroke-width="2.5"/>
               <path d="M140 500 C140 340 120 260 160 200 S 220 100 160 40" stroke-width="2.5"/>
@@ -258,8 +270,8 @@
           <div class="card-inner">
             <div class="flex items-start justify-between layer" style="--d:60">
               <div>
-                <div class="font-mono text-[10px] uppercase tracking-[0.3em] opacity-80">World 02 / Resort</div>
-                <div class="font-mono text-[10px] uppercase tracking-[0.3em] opacity-60 mt-1">Green · White · Bamboo</div>
+                <div class="font-mono text-[10px] uppercase tracking-[0.3em] opacity-80">World 02 / Bamboo Village</div>
+                <div class="font-mono text-[10px] uppercase tracking-[0.3em] opacity-60 mt-1">Whale Bay · York · Black Johnson</div>
               </div>
               <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#fff;color:#1c4733">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h14m0 0L9 2m6 6l-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -267,12 +279,12 @@
             </div>
 
             <div class="layer" style="--d:100">
-              <h2 class="mega text-[clamp(2.2rem,10vw,6.6rem)]">Bondu<em>mani</em><br/><em style="color:#ffffff">Resort</em>.</h2>
-              <p class="font-script text-lg md:text-xl opacity-85 mt-3 max-w-xs">sleep in bamboo, wake to the atlantic.</p>
+              <h2 class="mega text-[clamp(2.2rem,10vw,6.6rem)]">Bondu<em>mani</em><br/><em style="color:#ffffff">Bamboo</em>.</h2>
+              <p class="font-script text-lg md:text-xl opacity-90 mt-3 max-w-xs">the river, the bamboo, the canvas — met.</p>
               <div class="chipline mt-6">
-                <span class="pill" style="color:#eaf4ec;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)">bamboo massage</span>
-                <span class="pill" style="color:#eaf4ec;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)">beach walk</span>
-                <span class="pill" style="color:#eaf4ec;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)">24/7 reception</span>
+                <span class="pill" style="color:#eaf4ec;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)">floating lunch</span>
+                <span class="pill" style="color:#eaf4ec;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)">river spa</span>
+                <span class="pill" style="color:#eaf4ec;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)">A-frame cabins</span>
               </div>
             </div>
           </div>

@@ -3,30 +3,32 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Bondumani Resort — Bamboo Village on the Sierra Leonean Peninsula</title>
-<meta name="description" content="A quiet bamboo village on Peninsular Road. Standard rooms, signature bamboo massage, 24/7 reception. Steps from the Atlantic." />
+<title>Bondumani Bamboo Village — Whale Bay River, Freetown Peninsula</title>
+<meta name="description" content="An eco-conscious bamboo village on the Whale Bay River between York and Black Johnson. Floating lunches, river spa, A-frame cabins, bamboo rafting, yoga and a living art gallery — Sierra Leone, founded October 2025." />
+<link rel="icon" href="/logo.png" />
 <script type="module" src="/src/resort.js"></script>
 <style>
   :root{
     --paper:#f8f5ec;
     --paper-2:#eee7d4;
-    --ink:#0c1a13;
-    --green:#1c4733;
-    --green-deep:#0f2a1e;
-    --green-hi:#2e6d4d;
-    --green-mist:#a7c8b4;
-    --moss:#7d9e87;
-    --off:#fdfcf7;
+    --ink:#0e1a13;
+    --ink-soft:#1a2b1f;
+    --green:#3a5a3f;
+    --green-deep:#1d3524;
+    --green-leaf:#51744f;
+    --green-mist:#c9d7b8;
+    --walnut:#6b4a2c;
+    --walnut-light:#a47c52;
+    --off:#ffffff;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
-  .font-display{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 60,'WONK' 0;letter-spacing:-0.04em;line-height:0.9}
+  .font-display{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 55,'WONK' 0;letter-spacing:-0.04em;line-height:0.9}
   .font-script{font-family:'Instrument Serif',serif;font-style:italic;letter-spacing:-0.005em}
   .font-mono{font-family:'Geist Mono',monospace;letter-spacing:0.05em;text-transform:uppercase}
   .mega{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 80,'WONK' 0;letter-spacing:-0.055em;line-height:0.82}
   .mega em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal;letter-spacing:-0.02em}
 
-  /* grain overlay */
   body::before{
     content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
@@ -34,33 +36,32 @@
   }
   .bg-misty{
     background:
-      radial-gradient(900px 550px at 8% -10%, rgba(28,71,51,0.15), transparent 55%),
-      radial-gradient(800px 600px at 102% 110%, rgba(125,158,135,0.25), transparent 55%),
+      radial-gradient(900px 550px at 8% -10%, rgba(58,90,63,0.12), transparent 55%),
+      radial-gradient(800px 600px at 102% 110%, rgba(164,124,82,0.18), transparent 55%),
       var(--paper);
   }
 
-  /* intro veil */
-  .intro{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at center, #2e6d4d 0%, #0f2a1e 70%, #030806 100%);pointer-events:none}
+  .intro{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at center, #51744f 0%, #1d3524 70%, #060f0a 100%);pointer-events:none}
 
   .pill{
     display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
-    border:1px solid rgba(12,26,19,0.18);font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
-    background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);
+    border:1px solid rgba(14,26,19,0.2);font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);
   }
-  .dot{width:6px;height:6px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(28,71,51,0.25)}
+  .dot{width:6px;height:6px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(58,90,63,0.25)}
 
   .btn{
-    display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;
     background:var(--green);color:var(--off);font-family:'Geist',sans-serif;font-weight:500;font-size:14px;
     transition:transform .3s cubic-bezier(.2,.8,.2,1), background .3s ease;
   }
   .btn:hover{transform:translateY(-2px);background:var(--green-deep)}
-  .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(12,26,19,0.22)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(14,26,19,0.22)}
   .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn.walnut{background:var(--walnut);color:#fff9ed}
+  .btn.walnut:hover{background:var(--walnut-light);color:var(--ink)}
   .btn.white{background:#fff;color:var(--ink)}
-  .btn.white:hover{background:var(--paper-2)}
 
-  /* marquee */
   @keyframes scroll{to{transform:translateX(-50%)}}
   .marquee{display:flex;gap:2.4rem;white-space:nowrap;animation:scroll 60s linear infinite}
 
@@ -68,97 +69,103 @@
   @media (min-width:640px){.section-pad{padding:80px 24px}}
   @media (min-width:768px){.section-pad{padding:120px 56px}}
 
-  /* bamboo frame decoration */
-  .bamboo-line{position:absolute;top:0;bottom:0;width:2px;background:repeating-linear-gradient(180deg, rgba(28,71,51,0.5) 0 24px, transparent 24px 28px);pointer-events:none}
-
-  /* image treatment */
   .nature-img{position:relative;overflow:hidden;border-radius:18px;background:var(--green-deep)}
   .nature-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s ease}
   .nature-img:hover img{transform:scale(1.04)}
-  .nature-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,42,30,0.05), rgba(15,42,30,0.35));pointer-events:none}
 
-  /* float */
   @keyframes float{0%,100%{transform:translate3d(0,0,0) rotate(var(--r,0deg))}50%{transform:translate3d(0,-12px,0) rotate(calc(var(--r,0deg) + 2deg))}}
   .float{animation:float 8s ease-in-out infinite}
 
-  /* spinning label */
   @keyframes spin{to{transform:rotate(360deg)}}
   .spin-label{animation:spin 28s linear infinite;transform-origin:center}
 
-  /* reveal */
   .reveal-wrap{overflow:hidden}
   .reveal-wrap .line{display:block;transform:translateY(120%)}
   .reveal-wrap.in .line{transform:translateY(0);transition:transform 1.2s cubic-bezier(.2,.85,.2,1)}
 
-  /* hand-drawn leaf */
-  .leaf{position:absolute;color:var(--green);opacity:0.4}
-
-  /* chip */
-  .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:#fff;border:1px solid rgba(12,26,19,0.12);font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase}
-
-  /* underline link */
-  .ulink{background-image:linear-gradient(var(--green),var(--green));background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:#fff;border:1px solid rgba(14,26,19,0.12);font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase}
+  .ulink{background-image:linear-gradient(var(--green),var(--green));background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .4s ease}
   .ulink:hover{background-size:100% 2px}
 
-  /* interactive tile */
-  .tile{transition:transform .4s cubic-bezier(.2,.8,.2,1);will-change:transform}
-
-  /* rooms card */
-  .room{
-    position:relative;border-radius:18px;overflow:hidden;
-    background:var(--off);
-    border:1px solid rgba(12,26,19,0.08);
-  }
-
-  /* divider leaves */
   .leafline{display:flex;align-items:center;gap:14px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.6}
-  .leafline::before,.leafline::after{content:'';flex:1;height:1px;background:rgba(12,26,19,0.15)}
+  .leafline::before,.leafline::after{content:'';flex:1;height:1px;background:rgba(14,26,19,0.15)}
 
-  /* footer */
   .foot{background:var(--green-deep);color:#e6eee8}
 
   a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:4px}
 
-  /* hero media */
-  .hero-media{
-    position:relative;border-radius:28px;overflow:hidden;
-    background:var(--green-deep);
-  }
+  .hero-media{position:relative;border-radius:28px;overflow:hidden;background:var(--green-deep)}
   .hero-media img{display:block;width:100%;height:100%;object-fit:cover}
-  .hero-media::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(135deg, rgba(15,42,30,0.1) 0%, rgba(15,42,30,0.35) 100%);
-    pointer-events:none;
+  .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(14,26,19,0.1) 0%, rgba(14,26,19,0.4) 100%);pointer-events:none}
+
+  /* ---- Experiences BENTO ---- */
+  .xp{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:220px;gap:12px}
+  .xp-card{position:relative;overflow:hidden;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;color:#fff9ed;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .xp-card:hover{transform:translateY(-4px)}
+  .xp-card .bg{position:absolute;inset:0;z-index:0}
+  .xp-card .bg img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+  .xp-card:hover .bg img{transform:scale(1.06)}
+  .xp-card::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(14,26,19,0.25) 0%, rgba(14,26,19,0.75) 100%)}
+  .xp-card>*{position:relative;z-index:2}
+  .xp-card h3{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 100,'WONK' 0;letter-spacing:-0.04em;line-height:0.95}
+  .xp-card h3 em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal}
+  .xp-card p{font-size:12px;line-height:1.45;opacity:0.9}
+  .xp-card .num{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.8}
+  .xp-card .price{font-family:'Fraunces',serif;font-size:22px;letter-spacing:-0.02em;color:var(--green-mist)}
+  .xp-card .price em{font-family:'Instrument Serif',serif;font-style:italic;color:#fff;opacity:0.8}
+  .xp-card .incl{font-size:11px;line-height:1.5;opacity:0.85}
+
+  .xp-hero{grid-column:span 8;grid-row:span 2}
+  .xp-v{grid-column:span 4;grid-row:span 2}
+  .xp-h{grid-column:span 6;grid-row:span 1}
+  .xp-w{grid-column:span 8;grid-row:span 1}
+  .xp-sq{grid-column:span 4;grid-row:span 1}
+  .xp-full{grid-column:span 12;grid-row:span 1}
+
+  @media (max-width:900px){
+    .xp{grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:10px}
+    .xp-hero,.xp-v,.xp-h,.xp-w,.xp-sq,.xp-full{grid-column:span 4;grid-row:span 1}
+    .xp-hero{grid-row:span 2}
+  }
+  @media (max-width:520px){
+    .xp{grid-auto-rows:180px}
+    .xp-card{padding:18px;border-radius:16px}
   }
 
-  /* clock/time */
-  .monoblock{font-family:'Geist Mono',monospace}
+  /* ---- Rooms BENTO ---- */
+  .rm{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:190px;gap:12px}
+  .rm-card{position:relative;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;color:#fff9ed;padding:22px;transition:transform .5s ease}
+  .rm-card:hover{transform:translateY(-4px)}
+  .rm-card .bg{position:absolute;inset:0;z-index:0}
+  .rm-card .bg img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+  .rm-card:hover .bg img{transform:scale(1.06)}
+  .rm-card::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(14,26,19,0.1) 30%, rgba(14,26,19,0.85) 100%)}
+  .rm-card>*{position:relative;z-index:2}
+  .rm-card .tag{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.8}
+  .rm-card h3{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 100,'WONK' 0;letter-spacing:-0.04em;line-height:0.95;margin-top:8px}
+  .rm-card h3 em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal}
+  .rm-card .price{font-family:'Fraunces',serif;font-size:20px;color:var(--green-mist);margin-top:10px}
 
-  /* price card */
-  .pricecard{border-radius:22px;overflow:hidden}
+  .rm-big{grid-column:span 7;grid-row:span 2}
+  .rm-med{grid-column:span 5;grid-row:span 1}
+  .rm-sq{grid-column:span 4;grid-row:span 1}
+  .rm-wide{grid-column:span 8;grid-row:span 1}
 
-  /* testimonial block */
+  @media (max-width:900px){
+    .rm{grid-template-columns:repeat(4,1fr);grid-auto-rows:200px}
+    .rm-big,.rm-med,.rm-sq,.rm-wide{grid-column:span 4;grid-row:span 1}
+    .rm-big{grid-row:span 2}
+  }
+
+  /* facility stat */
+  .fac{display:flex;align-items:flex-start;gap:12px;padding:18px;border-radius:16px;background:var(--paper-2);border:1px solid rgba(14,26,19,0.08)}
+  .fac-icon{width:36px;height:36px;border-radius:999px;background:var(--walnut);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
   .quote-giant{
-    font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1.1;letter-spacing:-0.02em;
+    font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(2rem,5vw,4rem);line-height:1.1;letter-spacing:-0.02em;
   }
 
-  /* gallery masonry */
-  .gal{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-  .gi1{grid-column:span 3;aspect-ratio:3/2}
-  .gi2{grid-column:span 3;aspect-ratio:3/2}
-  .gi3{grid-column:span 2;aspect-ratio:3/4}
-  .gi4{grid-column:span 2;aspect-ratio:3/4}
-  .gi5{grid-column:span 2;aspect-ratio:3/4}
-  @media (max-width:900px){.gal{grid-template-columns:repeat(2,1fr);gap:10px}.gi1,.gi2{grid-column:span 2}.gi3,.gi4,.gi5{grid-column:span 1}}
-  @media (max-width:420px){.gal{grid-template-columns:1fr}.gi1,.gi2{grid-column:span 1}}
-
-  /* Decorative SVG wave */
-  .wave-stroke{stroke-dasharray:6 10;stroke-linecap:round}
-
-  /* index ribbon */
-  .ribbon{
-    background:var(--green);color:var(--off);
-  }
+  .logo-wm{height:60px;width:auto}
 </style>
 </head>
 <body class="bg-misty">
@@ -169,25 +176,22 @@
   <!-- Top nav -->
   <header class="flex items-center justify-between gap-3 px-4 sm:px-6 md:px-10 pt-5 md:pt-6 relative z-10">
     <a href="../" class="flex items-center gap-3 min-w-0">
-      <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style="background:var(--ink);color:var(--off)">
-        <span class="font-display text-lg" style="line-height:1">B</span>
-      </div>
+      <img src="/logo.png" alt="Bondumani Bamboo Village" class="w-11 h-11 object-contain shrink-0" />
       <div class="leading-tight min-w-0">
-        <div class="font-display text-base sm:text-lg truncate">Bondumani <em class="font-script" style="color:var(--green)">Resort</em></div>
+        <div class="font-display text-base sm:text-lg truncate">Bondumani <em class="font-script" style="color:var(--green)">Bamboo Village</em></div>
         <div class="font-mono text-[9px] opacity-60 truncate">← back to the worlds</div>
       </div>
     </a>
 
     <nav class="hidden lg:flex items-center gap-6 font-mono text-[11px]">
       <a class="ulink" href="#story">village</a>
-      <a class="ulink" href="#rooms">rooms</a>
-      <a class="ulink" href="#bamboo">bamboo</a>
-      <a class="ulink" href="#location">peninsula</a>
+      <a class="ulink" href="#stay">stay</a>
+      <a class="ulink" href="#experiences">experiences</a>
       <a class="ulink" href="#gallery">gallery</a>
       <a class="ulink" href="#book">book</a>
     </nav>
 
-    <a href="#book" class="btn white shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
+    <a href="#book" class="btn walnut shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
       <span class="hidden sm:inline">Book a stay</span>
       <span class="sm:hidden">Book</span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -197,111 +201,118 @@
   <!-- HERO -->
   <section class="relative px-4 sm:px-6 md:px-10 pt-10 sm:pt-14 md:pt-20 pb-10 sm:pb-12 overflow-hidden">
 
-    <!-- decorative SVG wave -->
-    <svg class="absolute left-[4%] top-[38%] opacity-60 hidden md:block" width="180" height="80" viewBox="0 0 180 80" fill="none">
-      <path class="wave-stroke" d="M2 40 Q30 10 60 40 T120 40 T178 40" stroke="#1c4733" stroke-width="2"/>
-    </svg>
-    <svg class="absolute right-[5%] top-[55%] opacity-50 hidden md:block float" style="--r:6deg" width="120" height="120" viewBox="0 0 120 120" fill="none">
-      <path d="M60 10 C 90 25, 100 55, 60 110 C 20 55, 30 25, 60 10 Z" stroke="#1c4733" fill="none" stroke-width="1.4"/>
-      <path d="M60 20 L60 100" stroke="#1c4733" stroke-width="1"/>
-    </svg>
-
     <div class="max-w-7xl mx-auto relative">
-      <!-- top badges -->
       <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 sm:mb-10">
-        <span class="pill"><span class="dot"></span> Reception · 24 / 7</span>
-        <span class="pill hidden sm:inline-flex">Peninsular Road · Big Water Village</span>
-        <span class="pill">Bamboo Village</span>
+        <span class="pill"><span class="dot"></span> Open · reception 24 / 7</span>
+        <span class="pill hidden sm:inline-flex">Whale Bay River · York ↔ Black Johnson</span>
+        <span class="pill" style="background:var(--walnut);color:#fff9ed;border-color:transparent">Founded October 2025</span>
       </div>
 
-      <!-- Heading -->
-      <h1 class="mega text-[clamp(2.8rem,13vw,12.5rem)] break-words">
-        <span class="block reveal-wrap"><span class="line">where the</span></span>
-        <span class="block reveal-wrap"><span class="line"><em style="color:var(--green)">bamboo</em> meets</span></span>
-        <span class="block reveal-wrap"><span class="line">the atlantic.</span></span>
+      <h1 class="mega text-[clamp(2.6rem,12vw,11rem)] break-words">
+        <span class="block reveal-wrap"><span class="line">the <em style="color:var(--green)">river</em>,</span></span>
+        <span class="block reveal-wrap"><span class="line">the bamboo,</span></span>
+        <span class="block reveal-wrap"><span class="line">&amp; the <em style="color:var(--walnut)">canvas</em>.</span></span>
       </h1>
 
       <div class="grid md:grid-cols-12 gap-8 sm:gap-10 mt-10 sm:mt-14 items-end">
         <div class="md:col-span-5 order-2 md:order-1">
           <p class="font-script text-xl sm:text-2xl md:text-3xl opacity-90 leading-snug">
-            A small, slow hotel on Sierra Leone's Western Peninsula —
-            steps from River No. 2 Beach, rooms built to let the evening
-            in, and a signature bamboo massage that ends arguments.
+            An eco-conscious adventure retreat on the Whale Bay River —
+            A-frame cabins, 24-hour solar power, floating lunches drifting
+            downstream and an on-site gallery where Sierra Leone's art lives.
           </p>
           <div class="flex flex-wrap gap-3 mt-6 sm:mt-8">
-            <a class="btn" href="#book">Book a room</a>
-            <a class="btn ghost" href="#bamboo">The bamboo experience</a>
+            <a class="btn" href="#experiences">See experiences</a>
+            <a class="btn ghost" href="#stay">Rooms &amp; rates</a>
           </div>
         </div>
 
         <div class="md:col-span-7 relative order-1 md:order-2">
           <div class="hero-media" style="aspect-ratio:5/4">
-            <img src="https://placehold.co/1000x800/1c4733/f8f5ec?text=Bamboo+Village+at+Dusk&font=lora" alt="Bamboo huts at dusk with bamboo lanterns"/>
+            <img src="/cabin-murals.jpg" alt="A-frame cabin with cave-painting murals at Bondumani Bamboo Village"/>
           </div>
 
-          <!-- spinning stamp -->
           <div class="absolute -top-4 sm:-top-6 -left-4 sm:-left-6 w-20 h-20 sm:w-28 sm:h-28">
             <svg class="spin-label w-full h-full" viewBox="0 0 120 120">
               <defs><path id="circ2" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
-              <circle cx="60" cy="60" r="58" fill="#ffffff" stroke="#1c4733" stroke-width="1"/>
-              <text font-family="Geist Mono" font-size="9" letter-spacing="2.5" fill="#1c4733"><textPath href="#circ2">BONDUMANI · RESORT · BAMBOO VILLAGE · PENINSULA · SL ·  </textPath></text>
-              <text x="60" y="65" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="22" fill="#1c4733">rest.</text>
+              <circle cx="60" cy="60" r="58" fill="#fff9ed" stroke="#3a5a3f" stroke-width="1"/>
+              <text font-family="Geist Mono" font-size="9" letter-spacing="2.5" fill="#3a5a3f"><textPath href="#circ2">BAMBOO VILLAGE · WHALE BAY RIVER · SINCE 2025 ·  </textPath></text>
+              <text x="60" y="65" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="22" fill="#3a5a3f">rest.</text>
             </svg>
           </div>
 
-          <!-- Bottom info badges -->
-          <div class="absolute -bottom-5 left-2 right-2 sm:left-4 sm:right-4 flex items-center justify-between bg-white rounded-full px-3 sm:px-5 py-2 sm:py-3 shadow-xl" style="box-shadow:0 20px 40px -20px rgba(15,42,30,0.35)">
-            <div class="flex items-center gap-2 sm:gap-3 monoblock text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.15em]">
+          <div class="absolute -bottom-5 left-2 right-2 sm:left-4 sm:right-4 flex items-center justify-between bg-white rounded-full px-3 sm:px-5 py-2 sm:py-3 shadow-xl" style="box-shadow:0 20px 40px -20px rgba(14,26,19,0.35)">
+            <div class="flex items-center gap-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.15em]">
               <span style="color:var(--green);font-weight:500">Check-in</span>
               <span>2pm · any day</span>
             </div>
             <div class="w-px h-5 sm:h-6 bg-black/10"></div>
-            <div class="flex items-center gap-2 sm:gap-3 monoblock text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.15em]">
-              <span style="color:var(--green);font-weight:500">from</span>
-              <span>SL · 🌿</span>
+            <div class="flex items-center gap-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.15em]">
+              <span style="color:var(--walnut);font-weight:500">from</span>
+              <span>$60 / night</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 mt-20 sm:mt-24 pt-8 sm:pt-10 border-t" style="border-color:rgba(12,26,19,0.12)">
-        <div>
-          <div class="font-display text-4xl sm:text-5xl md:text-6xl" style="color:var(--green)">24/7</div>
-          <div class="font-mono text-[10px] opacity-60 mt-2">reception never sleeps</div>
+      <!-- Facilities -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-20 sm:mt-24">
+        <div class="fac">
+          <div class="fac-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 9c2-2 4-2 6 0s4 2 6 0 4-2 4 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 13c2-2 4-2 6 0s4 2 6 0 4-2 4 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="font-display text-lg">Flowing river</div>
+            <div class="font-mono text-[9px] opacity-60 mt-1">whale bay</div>
+          </div>
         </div>
-        <div>
-          <div class="font-display text-3xl sm:text-5xl md:text-6xl" style="color:var(--green)">3 min</div>
-          <div class="font-mono text-[10px] opacity-60 mt-2">to the sand</div>
+        <div class="fac">
+          <div class="fac-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 1v2M9 15v2M1 9h2M15 9h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="font-display text-lg">Spa &amp; wellness</div>
+            <div class="font-mono text-[9px] opacity-60 mt-1">riverside</div>
+          </div>
         </div>
-        <div>
-          <div class="font-display text-3xl sm:text-5xl md:text-6xl" style="color:var(--green)">1 signature</div>
-          <div class="font-mono text-[10px] opacity-60 mt-2">bamboo massage</div>
+        <div class="fac">
+          <div class="fac-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 15L9 3L15 15H3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="font-display text-lg">A-frame cabins</div>
+            <div class="font-mono text-[9px] opacity-60 mt-1">rustic craft</div>
+          </div>
         </div>
-        <div>
-          <div class="font-display text-3xl sm:text-5xl md:text-6xl" style="color:var(--green)">2 worlds</div>
-          <div class="font-mono text-[10px] opacity-60 mt-2">art <em>+</em> rest · one gate</div>
+        <div class="fac">
+          <div class="fac-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="font-display text-lg">Tailored stays</div>
+            <div class="font-mono text-[9px] opacity-60 mt-1">private by design</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quiet marquee -->
-  <section class="ribbon py-4 sm:py-5 overflow-hidden">
+  <!-- Ribbon marquee -->
+  <section class="py-4 sm:py-5 overflow-hidden" style="background:var(--green);color:var(--paper)">
     <div class="marquee font-display text-xl sm:text-2xl md:text-4xl">
       <div class="flex gap-10 items-center">
-        <span class="font-script italic">where Sierra Leone's nature meets pure relaxation</span><span>◦</span>
-        <span>River No. 2</span><span>◦</span>
-        <span>Tokeh</span><span>◦</span>
-        <span>Bureh</span><span>◦</span>
-        <span class="font-script italic">bamboo · atlantic · evening</span><span>◦</span>
+        <span class="font-script italic">where nature, art, and the soul meet</span><span>◦</span>
+        <span>floating lunch</span><span>◦</span>
+        <span>bamboo rafting</span><span>◦</span>
+        <span>yoga &amp; meditation</span><span>◦</span>
+        <span class="font-script italic">whale bay river · freetown peninsula</span><span>◦</span>
       </div>
       <div class="flex gap-10 items-center" aria-hidden="true">
-        <span class="font-script italic">where Sierra Leone's nature meets pure relaxation</span><span>◦</span>
-        <span>River No. 2</span><span>◦</span>
-        <span>Tokeh</span><span>◦</span>
-        <span>Bureh</span><span>◦</span>
-        <span class="font-script italic">bamboo · atlantic · evening</span><span>◦</span>
+        <span class="font-script italic">where nature, art, and the soul meet</span><span>◦</span>
+        <span>floating lunch</span><span>◦</span>
+        <span>bamboo rafting</span><span>◦</span>
+        <span>yoga &amp; meditation</span><span>◦</span>
+        <span class="font-script italic">whale bay river · freetown peninsula</span><span>◦</span>
       </div>
     </div>
   </section>
@@ -311,87 +322,251 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 md:gap-12">
       <div class="md:col-span-5">
         <div class="leafline">✳ 01 · The village</div>
-        <h2 class="mega text-[clamp(2.2rem,6vw,4.6rem)] mt-6 sm:mt-8">A small hotel that <em style="color:var(--green)">forgets</em> to be a hotel.</h2>
+        <h2 class="mega text-[clamp(2.2rem,6vw,4.6rem)] mt-6 sm:mt-8">Not built. <em style="color:var(--green)">Crafted.</em></h2>
       </div>
       <div class="md:col-span-6 md:col-start-7">
-        <p class="font-script text-xl sm:text-2xl md:text-3xl leading-snug opacity-85 mb-6">
-          We built Bondumani as a bamboo village first and a hotel second —
-          low structures, a wandering path, trees left where they were,
-          light that behaves like it's on holiday too.
+        <p class="font-script text-xl sm:text-2xl md:text-3xl leading-snug opacity-90 mb-6">
+          Bondumani Bamboo Village opened on Sierra Leone's peninsula in October 2025 —
+          a sanctuary where sustainable architecture meets the sound of the Whale Bay River,
+          and where every wall tells a West-African story.
         </p>
         <p class="text-sm sm:text-base md:text-lg leading-relaxed opacity-80">
-          The same gate opens onto <a class="ulink" href="../art/">Bondumani Art</a>,
-          Sierra Leone's quietly famous painting studio. Stay with us and you
-          sleep surrounded by work that belongs in museums, then wake up a three-minute
-          walk from some of West Africa's finest coastline. This is a rare kind of quiet.
+          Rustic A-frame cabins. 24-hour solar power. A restaurant fusing traditional West
+          African flavours with international technique. An outdoor river spa. A yoga
+          clearing among the bamboo. And a curated gallery of contemporary Sierra Leonean
+          art — the same family that runs <a class="ulink" href="../art/">Bondumani Art</a> in Freetown.
+        </p>
+        <p class="text-sm sm:text-base md:text-lg leading-relaxed opacity-80 mt-4">
+          Freetown has many places to stay. There is only one place where the river,
+          the bamboo and the canvas meet.
         </p>
 
         <div class="flex flex-wrap gap-2 mt-8 sm:mt-10">
-          <div class="chip">24/7 reception</div>
-          <div class="chip">bamboo architecture</div>
-          <div class="chip">signature massage</div>
-          <div class="chip">atlantic peninsula</div>
-          <div class="chip">art on every wall</div>
-          <div class="chip">small · slow · sierra leone</div>
+          <div class="chip">eco A-frame cabins</div>
+          <div class="chip">24-hr solar power</div>
+          <div class="chip">on-site art gallery</div>
+          <div class="chip">restaurant · west african</div>
+          <div class="chip">river spa &amp; yoga</div>
+          <div class="chip">between york &amp; black johnson</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ROOMS -->
-  <section id="rooms" class="section-pad" style="background:var(--paper-2)">
+  <!-- STAY / ROOMS -->
+  <section id="stay" class="section-pad" style="background:var(--paper-2)">
     <div class="max-w-7xl mx-auto">
-      <div class="flex items-end justify-between flex-wrap gap-6 mb-12">
+      <div class="flex items-end justify-between flex-wrap gap-4 sm:gap-6 mb-8 sm:mb-12">
         <div>
-          <div class="leafline">✳ 02 · Rooms</div>
-          <h2 class="mega text-[clamp(2.4rem,6.5vw,5.4rem)] mt-8">Sleep in <em style="color:var(--green)">bamboo</em>.</h2>
+          <div class="leafline">✳ 02 · Stay</div>
+          <h2 class="mega text-[clamp(2.4rem,6.5vw,5.4rem)] mt-6 sm:mt-8">Sleep in <em style="color:var(--green)">bamboo</em>.</h2>
         </div>
-        <p class="max-w-md opacity-80">Every room opens to the village path. Beds dressed for the climate, windows sized for the evening, and enough quiet to hear the Atlantic when it gets loud.</p>
+        <p class="max-w-md opacity-80 text-sm sm:text-base">Five cabin types — from a single bed under the stars to the riverfront suite with the Whale Bay in your window. Each A-frame hand-crafted, each one opening on the village path.</p>
       </div>
 
-      <div class="grid md:grid-cols-12 gap-4 sm:gap-6">
-        <!-- Feature room -->
-        <article class="md:col-span-8 room">
-          <div class="nature-img" style="aspect-ratio:16/10"><img src="https://placehold.co/1280x800/1c4733/f8f5ec?text=Standard+Room+%7C+bamboo+interior&font=lora"/></div>
-          <div class="p-5 sm:p-8 md:p-10 grid md:grid-cols-12 gap-4 sm:gap-6 items-end">
-            <div class="md:col-span-7">
-              <div class="flex items-center flex-wrap gap-2 sm:gap-3 font-mono text-[10px] opacity-70">
-                <span>room 01</span><span>·</span><span>from 2 guests</span><span>·</span><span>standard</span>
-              </div>
-              <h3 class="font-display text-3xl sm:text-4xl md:text-5xl mt-3 sm:mt-4">The Standard Room.</h3>
-              <p class="mt-3 opacity-80 max-w-md font-script text-lg sm:text-xl">A queen bed, a bamboo ceiling, a reading chair that faces the path. Simple the way you want it after a day of sea and salt.</p>
-            </div>
-            <div class="md:col-span-4 md:col-start-9 md:text-right">
-              <div class="font-display text-4xl sm:text-5xl" style="color:var(--green)">SLE —</div>
-              <div class="font-mono text-[10px] opacity-60 mt-1">rates on request · WhatsApp</div>
-              <a href="#book" class="btn mt-4 inline-flex">Check availability</a>
-            </div>
+      <div class="rm">
+        <!-- Riverfront large -->
+        <article class="rm-card rm-big">
+          <div class="bg"><img src="/cabin-murals.jpg" alt="Riverfront cabin with murals"/></div>
+          <div>
+            <div class="tag">suite · 01</div>
+            <h3 style="font-size:clamp(2rem,4vw,3.2rem)">Riverfront <em>large</em>.</h3>
+            <p class="mt-2 max-w-md text-sm opacity-90">The signature suite — hand-painted walls in ochre cave-motifs, woven light, river window. The whole Whale Bay in one room.</p>
+            <div class="price">le 4,000 <em>· $180 / night</em></div>
           </div>
         </article>
 
-        <!-- Secondary cards -->
-        <article class="md:col-span-4 room">
-          <div class="nature-img" style="aspect-ratio:4/5"><img src="https://placehold.co/600x750/0f2a1e/a7c8b4?text=En-suite&font=lora"/></div>
-          <div class="p-5 sm:p-6">
-            <div class="font-mono text-[10px] opacity-60">features</div>
-            <ul class="mt-3 space-y-2 text-sm">
-              <li class="flex gap-2"><span style="color:var(--green)">✳</span> Private en-suite</li>
-              <li class="flex gap-2"><span style="color:var(--green)">✳</span> Breeze-open windows</li>
-              <li class="flex gap-2"><span style="color:var(--green)">✳</span> Art on the wall</li>
-              <li class="flex gap-2"><span style="color:var(--green)">✳</span> Bamboo headboard</li>
-              <li class="flex gap-2"><span style="color:var(--green)">✳</span> 3-minute walk to coast</li>
-            </ul>
+        <!-- Riverfront small -->
+        <article class="rm-card rm-med">
+          <div class="bg"><img src="/cabin-green.jpg" alt="Riverfront small cabin"/></div>
+          <div>
+            <div class="tag">suite · 02</div>
+            <h3 style="font-size:clamp(1.4rem,2.4vw,1.9rem)">Riverfront <em>small</em>.</h3>
+            <div class="price">le 3,000 <em>· $140</em></div>
           </div>
         </article>
+
+        <!-- Double upstairs -->
+        <article class="rm-card rm-sq">
+          <div class="bg"><img src="/cabin-tiedye.jpg" alt="Double upstairs cabin"/></div>
+          <div>
+            <div class="tag">double · 03</div>
+            <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Upstairs <em>double</em>.</h3>
+            <div class="price">le 2,000 <em>· $90</em></div>
+          </div>
+        </article>
+
+        <!-- Double downstairs -->
+        <article class="rm-card rm-sq">
+          <div class="bg"><img src="/cabin-evening.jpg" alt="Double downstairs cabin"/></div>
+          <div>
+            <div class="tag">double · 04</div>
+            <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Downstairs <em>double</em>.</h3>
+            <div class="price">le 1,500 <em>· $60</em></div>
+          </div>
+        </article>
+
+        <!-- Single -->
+        <article class="rm-card rm-sq">
+          <div class="bg"><img src="/cabin-tiedye-2.jpg" alt="Single cabin"/></div>
+          <div>
+            <div class="tag">single · 05</div>
+            <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Single <em>cabin</em>.</h3>
+            <div class="price">le 2,500 <em>· $110</em></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] opacity-60">
+        <span>rates per night · WhatsApp to book</span>
+        <a class="ulink" href="mailto:Bondumaniart20@gmail.com">Bondumaniart20@gmail.com →</a>
       </div>
     </div>
   </section>
 
-  <!-- BAMBOO EXPERIENCE -->
-  <section id="bamboo" class="section-pad relative overflow-hidden" style="background:var(--green);color:var(--off)">
-    <!-- Background bamboo strokes -->
+  <!-- EXPERIENCES (bento) -->
+  <section id="experiences" class="section-pad">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between flex-wrap gap-4 sm:gap-6 mb-10 sm:mb-14">
+        <div>
+          <div class="leafline">✳ 03 · Experiences</div>
+          <h2 class="mega text-[clamp(2.4rem,7vw,5.8rem)] mt-6 sm:mt-8">Nine <em class="font-script" style="color:var(--walnut)">reasons</em> to stay longer.</h2>
+        </div>
+        <p class="max-w-md opacity-80 text-sm sm:text-base">Every experience is included, tailored or private. Prices in Sierra Leonean leones and US dollars. Book ahead via WhatsApp.</p>
+      </div>
+
+      <div class="xp">
+
+        <!-- 01 Floating lunch HERO -->
+        <article class="xp-card xp-hero">
+          <div class="bg"><img src="/floating-lunch-couple.jpg" alt="Couple with floating food basket"/></div>
+          <div class="flex items-start justify-between">
+            <div class="num">01 · floating</div>
+            <div class="num" style="color:var(--green-mist)">signature</div>
+          </div>
+          <div>
+            <h3 style="font-size:clamp(2rem,4.4vw,3.4rem)">Floating lunch <em>&amp; swim</em>.</h3>
+            <p class="mt-2 max-w-sm">A woven basket drifts beside you. Menu of your choice. Cocktails or wine. Swim afterward.</p>
+            <div class="flex items-end justify-between gap-4 mt-4 flex-wrap">
+              <div class="price">le 850 <em>· $35 pp</em></div>
+              <div class="incl">+ add'l le 750 · $30</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 Bamboo rafting TALL -->
+        <article class="xp-card xp-v">
+          <div class="bg"><img src="/raft-flag.jpg" alt="Bamboo rafting with Sierra Leone flag"/></div>
+          <div class="num">02 · rafting</div>
+          <div>
+            <h3 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">Bamboo <em>rafting</em>.</h3>
+            <p class="mt-2">Limestone body massage on the raft. Seasonal fruits. Coconut drink. Max 3 guests per raft.</p>
+            <div class="price mt-3">le 750 <em>· $35 pp</em></div>
+          </div>
+        </article>
+
+        <!-- 03 Yoga -->
+        <article class="xp-card xp-h">
+          <div class="bg"><img src="/yoga.jpg" alt="Yoga under the bamboo"/></div>
+          <div class="num">03 · yoga</div>
+          <div>
+            <h3 style="font-size:clamp(1.4rem,2.4vw,2rem)">Yoga <em>&amp; meditation</em>.</h3>
+            <div class="flex items-end justify-between gap-3 mt-3 flex-wrap">
+              <div class="price">le 1,500 <em>pp</em></div>
+              <div class="incl">couple le 2,700 · 4 for le 5,000</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 Picnic + painting -->
+        <article class="xp-card xp-h">
+          <div class="bg"><img src="/painting-teepee.jpg" alt="Picnic and painting setup under bamboo teepee"/></div>
+          <div class="num">04 · paint</div>
+          <div>
+            <h3 style="font-size:clamp(1.4rem,2.4vw,2rem)">Picnic <em>&amp; painting</em>.</h3>
+            <p class="mt-2 text-[11px]">All art materials. Full picnic setup. Cocktails or wine.</p>
+            <div class="flex items-end justify-between gap-3 mt-2 flex-wrap">
+              <div class="price">le 2,500 <em>· $110</em></div>
+              <div class="incl">+ le 1,150 · $50</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 River spa -->
+        <article class="xp-card xp-sq">
+          <div class="bg"><img src="/spa-beds.jpg" alt="Outdoor spa beds by the river"/></div>
+          <div class="num">05 · spa</div>
+          <div>
+            <h3 style="font-size:clamp(1.3rem,2.1vw,1.8rem)">River spa <em>massage</em>.</h3>
+            <div class="price mt-2">le 1,200 <em>· $50</em></div>
+          </div>
+        </article>
+
+        <!-- 06 River lunch -->
+        <article class="xp-card xp-sq">
+          <div class="bg"><img src="/river-lunch-canopy.jpg" alt="Lunch by the river under canopy tent"/></div>
+          <div class="num">06 · lunch</div>
+          <div>
+            <h3 style="font-size:clamp(1.3rem,2.1vw,1.8rem)">Lunch <em>by the river</em>.</h3>
+            <div class="price mt-2">le 700 <em>pp</em></div>
+          </div>
+        </article>
+
+        <!-- 07 Private BBQ -->
+        <article class="xp-card xp-sq" style="background:var(--walnut)">
+          <div class="num" style="color:#fff">07 · bbq</div>
+          <div>
+            <h3 style="font-size:clamp(1.3rem,2.1vw,1.8rem);color:#fff">Private <em>BBQ</em>.</h3>
+            <p class="mt-2 text-[11px]" style="color:#fff9ed">Riverside setup. Ingredients + sides. Cocktails / wine / beer / soft drinks.</p>
+            <div class="flex items-end justify-between gap-3 mt-2 flex-wrap">
+              <div class="price" style="color:#fff9ed">le 1,500 <em style="color:#fff;opacity:0.7">$60</em></div>
+              <div class="incl" style="color:#fff9ed">couple le 2,800 · 4 for le 5,200</div>
+            </div>
+          </div>
+        </article>
+        <style>.xp-card[style*="walnut"]::after{display:none}.xp-card[style*="walnut"]>*{position:relative;z-index:2}</style>
+
+        <!-- 08 Candlelit dinner WIDE -->
+        <article class="xp-card xp-w">
+          <div class="bg"><img src="/candlelit-proposal.jpg" alt="Private candlelit dinner setup"/></div>
+          <div class="flex items-start justify-between">
+            <div class="num">08 · dinner</div>
+            <div class="num" style="color:var(--green-mist)">couple · min 2</div>
+          </div>
+          <div>
+            <h3 style="font-size:clamp(1.8rem,3.2vw,2.6rem)">Private candlelit <em>dinner</em>.</h3>
+            <p class="mt-2 max-w-md">Full course dinner on a decorated river terrace. Drinks of your choice.</p>
+            <div class="flex items-end justify-between gap-3 mt-3 flex-wrap">
+              <div class="price">le 1,800 <em>· $80 / couple</em></div>
+              <div class="incl">+ add'l le 800 · $33</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 09 Flower bath -->
+        <article class="xp-card xp-sq" style="background:var(--green-deep)">
+          <div class="num" style="color:#fff">09 · bath</div>
+          <div>
+            <h3 style="font-size:clamp(1.3rem,2.1vw,1.8rem);color:#fff">Flower <em>bath</em>.</h3>
+            <p class="mt-2 text-[11px]" style="color:#fff9ed">Decorated with your name. Fruits + cocktails / wine.</p>
+            <div class="price mt-2" style="color:var(--green-mist)">le 1,500 <em>· $60</em></div>
+          </div>
+        </article>
+        <style>.xp-card[style*="green-deep"]::after{display:none}</style>
+
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] opacity-60">
+        <span>all experiences bookable individually or bundled</span>
+        <span>whatsapp · +232 76 403 799</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENCE -->
+  <section class="section-pad relative overflow-hidden" style="background:var(--green);color:var(--paper)">
     <svg class="absolute inset-0 w-full h-full opacity-20" preserveAspectRatio="none" viewBox="0 0 1000 600" fill="none">
-      <g stroke="#a7c8b4" stroke-width="2" stroke-linecap="round">
+      <g stroke="#c9d7b8" stroke-width="2" stroke-linecap="round">
         <path d="M60 600 C60 400 40 300 90 200 S 170 60 80 20" />
         <path d="M200 600 C200 440 180 320 230 240 S 310 80 230 30" />
         <path d="M360 600 C360 420 330 300 380 220 S 460 60 400 10" />
@@ -401,82 +576,28 @@
       </g>
     </svg>
 
-    <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 md:gap-12 items-center relative">
-      <div class="md:col-span-6">
-        <div class="leafline" style="color:var(--green-mist)">✳ 03 · Bamboo massage</div>
-        <h2 class="mega text-[clamp(2.4rem,7vw,5.8rem)] mt-6 sm:mt-8">An hour that <em style="color:var(--green-mist)">ends</em> arguments.</h2>
-        <p class="font-script text-xl sm:text-2xl opacity-90 mt-6 sm:mt-8 max-w-md">
-          Our signature bamboo relaxation treatment is built around warmed,
-          hand-cut bamboo stalks of varying weights — rolled along the back
-          and shoulders in slow, deliberate passes.
-        </p>
-        <p class="text-base opacity-80 mt-4 max-w-md">
-          The heat softens the muscle, the pressure finds the knots, and the
-          sound of the bamboo — a hollow, woody rhythm — turns out to be the
-          most surprising part of the whole thing.
-        </p>
+    <div class="max-w-6xl mx-auto relative">
+      <div class="leafline" style="color:var(--green-mist)">✳ 04 · The Bondumani difference</div>
+      <h2 class="mega text-[clamp(2.4rem,7vw,5.8rem)] mt-6 sm:mt-8" style="color:var(--paper)">
+        True luxury is <em style="color:var(--green-mist)">harmony</em>.
+      </h2>
 
-        <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-8 sm:mt-10">
-          <div>
-            <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">60'</div>
-            <div class="font-mono text-[9px] sm:text-[10px] opacity-70 mt-1">standard session</div>
-          </div>
-          <div>
-            <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">90'</div>
-            <div class="font-mono text-[9px] sm:text-[10px] opacity-70 mt-1">deep session</div>
-          </div>
-          <div>
-            <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">2</div>
-            <div class="font-mono text-[9px] sm:text-[10px] opacity-70 mt-1">guests max / slot</div>
-          </div>
-        </div>
-
-        <a href="#book" class="btn mt-8 sm:mt-10" style="background:#fff;color:var(--ink)">Reserve a slot
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="md:col-span-6 relative">
-        <div class="grid grid-cols-5 gap-3">
-          <div class="col-span-3">
-            <div class="nature-img" style="aspect-ratio:4/5;border-radius:20px"><img src="https://placehold.co/600x750/0f2a1e/a7c8b4?text=Bamboo+stalks&font=lora"/></div>
-          </div>
-          <div class="col-span-2 flex flex-col gap-3">
-            <div class="nature-img" style="aspect-ratio:1/1;border-radius:16px"><img src="https://placehold.co/400x400/a7c8b4/0f2a1e?text=Oil&font=lora"/></div>
-            <div class="nature-img" style="aspect-ratio:3/4;border-radius:16px"><img src="https://placehold.co/400x520/f8f5ec/1c4733?text=Hands&font=lora"/></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section id="location" class="section-pad">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex items-end justify-between flex-wrap gap-4 sm:gap-6 mb-8 sm:mb-12">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 mt-10 sm:mt-14">
         <div>
-          <div class="leafline">✳ 04 · Peninsula</div>
-          <h2 class="mega text-[clamp(2.4rem,6.5vw,5.2rem)] mt-6 sm:mt-8">Freetown's <em style="color:var(--green)">best-kept</em> coast.</h2>
+          <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">Eco-architecture &amp; artistry</div>
+          <p class="mt-3 text-sm sm:text-base opacity-90 max-w-md">Our village is not just built. It is crafted — bamboo, walnut, canvas and river, assembled by hand.</p>
         </div>
-        <p class="max-w-md opacity-80 text-sm sm:text-base">Peninsular Road drops you into a string of beaches locals swear by — River No. 2, Tokeh, Bureh, and Banana Islands just offshore. Bondumani sits walking distance from the quietest stretch.</p>
-      </div>
-
-      <div class="grid md:grid-cols-12 gap-4">
-        <div class="md:col-span-8 nature-img" style="aspect-ratio:16/9;border-radius:22px">
-          <img src="https://placehold.co/1280x720/1c4733/f8f5ec?text=Peninsular+Road+%C2%B7+Coastline&font=lora"/>
+        <div>
+          <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">The original floating lunch</div>
+          <p class="mt-3 text-sm sm:text-base opacity-90 max-w-md">We reimagined the meal. Menus drift beside you as you drift down Whale Bay — West-African flavours, international technique, exclusive house-blend spices.</p>
         </div>
-        <div class="md:col-span-4 p-5 sm:p-7 rounded-2xl flex flex-col justify-between" style="background:var(--paper-2)">
-          <div>
-            <div class="font-mono text-[10px] opacity-60">walking & driving</div>
-            <ul class="mt-4 space-y-3 text-sm">
-              <li class="flex items-baseline gap-3"><span class="font-display text-xl" style="color:var(--green)">3′</span> to the Atlantic shore</li>
-              <li class="flex items-baseline gap-3"><span class="font-display text-xl" style="color:var(--green)">12′</span> drive to River No. 2</li>
-              <li class="flex items-baseline gap-3"><span class="font-display text-xl" style="color:var(--green)">22′</span> drive to Tokeh Beach</li>
-              <li class="flex items-baseline gap-3"><span class="font-display text-xl" style="color:var(--green)">40′</span> from central Freetown</li>
-              <li class="flex items-baseline gap-3"><span class="font-display text-xl" style="color:var(--green)">1h</span> to Banana Islands boat</li>
-            </ul>
-          </div>
-          <a class="ulink font-mono text-[11px] mt-6" href="https://maps.google.com/?q=Peninsular+Road+Big+Water+Village+Freetown" target="_blank" rel="noopener">open map →</a>
+        <div>
+          <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">A sanctuary for the senses</div>
+          <p class="mt-3 text-sm sm:text-base opacity-90 max-w-md">Our river spa has no walls. Yoga and meditation sessions run to the rhythm of the water and the forest around them.</p>
+        </div>
+        <div>
+          <div class="font-display text-2xl sm:text-3xl" style="color:var(--green-mist)">A living culture</div>
+          <p class="mt-3 text-sm sm:text-base opacity-90 max-w-md">We don't host guests. We host culture — intimate gallery exhibitions, proprietary cultural gatherings, heritage made breathable.</p>
         </div>
       </div>
     </div>
@@ -485,20 +606,20 @@
   <!-- GALLERY -->
   <section id="gallery" class="section-pad" style="background:var(--paper-2)">
     <div class="max-w-7xl mx-auto">
-      <div class="flex items-end justify-between flex-wrap gap-6 mb-10">
+      <div class="flex items-end justify-between flex-wrap gap-4 sm:gap-6 mb-8 sm:mb-10">
         <div>
-          <div class="leafline">✳ 05 · The gallery</div>
-          <h2 class="mega text-[clamp(2.4rem,6.5vw,5.2rem)] mt-8">Inside the <em style="color:var(--green)">village</em>.</h2>
+          <div class="leafline">✳ 05 · Inside the village</div>
+          <h2 class="mega text-[clamp(2.4rem,6.5vw,5.2rem)] mt-6 sm:mt-8">A <em style="color:var(--green)">river</em>, a canvas, an evening.</h2>
         </div>
-        <span class="font-script text-xl opacity-70">photographed over three evenings.</span>
+        <span class="font-script text-lg sm:text-xl opacity-70">whale bay · freetown peninsula</span>
       </div>
 
-      <div class="gal">
-        <div class="gi1 nature-img"><img src="https://placehold.co/900x600/1c4733/f8f5ec?text=Pathway&font=lora"/></div>
-        <div class="gi2 nature-img"><img src="https://placehold.co/900x600/a7c8b4/1c4733?text=Lamp+%26+Bamboo&font=lora"/></div>
-        <div class="gi3 nature-img"><img src="https://placehold.co/600x800/0f2a1e/f8f5ec?text=Room+Detail&font=lora"/></div>
-        <div class="gi4 nature-img"><img src="https://placehold.co/600x800/2e6d4d/f8f5ec?text=Evening+Courtyard&font=lora"/></div>
-        <div class="gi5 nature-img"><img src="https://placehold.co/600x800/f8f5ec/1c4733?text=Massage+Bed&font=lora"/></div>
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+        <div class="nature-img md:col-span-3" style="aspect-ratio:3/2"><img src="/village-evening.jpg" alt="Village at evening"/></div>
+        <div class="nature-img md:col-span-3" style="aspect-ratio:3/2"><img src="/gallery-pool.jpg" alt="Gallery and pool area"/></div>
+        <div class="nature-img md:col-span-2" style="aspect-ratio:3/4"><img src="/paint-class.jpg" alt="Painting class guests"/></div>
+        <div class="nature-img md:col-span-2" style="aspect-ratio:3/4"><img src="/floating-lunch-solo.jpg" alt="Floating lunch guest"/></div>
+        <div class="nature-img md:col-span-2" style="aspect-ratio:3/4"><img src="/proposal-wide.jpg" alt="River terrace proposal setup"/></div>
       </div>
     </div>
   </section>
@@ -506,9 +627,9 @@
   <!-- QUOTE -->
   <section class="section-pad">
     <div class="max-w-5xl mx-auto text-center">
-      <div class="leafline justify-center">✳ 06 · Small review</div>
-      <p class="quote-giant mt-8 sm:mt-10 px-2">"We came for a weekend. We moved our flight twice. Bondumani is the only place on the peninsula that still feels made by a person."</p>
-      <div class="font-mono text-[11px] opacity-60 mt-6 sm:mt-8">— guest · january 2026</div>
+      <div class="leafline justify-center">✳ 06 · In our words</div>
+      <p class="quote-giant mt-8 sm:mt-10 px-2">"Bondumani Bamboo Village is more than a destination — it is a perspective."</p>
+      <div class="font-mono text-[11px] opacity-60 mt-6 sm:mt-8">— founded october 2025 · whale bay river</div>
     </div>
   </section>
 
@@ -519,12 +640,12 @@
       <div class="md:col-span-7 order-2 md:order-1">
         <div class="leafline" style="color:var(--green-mist)">✳ 07 · The other world</div>
         <h2 class="mega text-[clamp(2.4rem,7vw,5.8rem)] mt-6 sm:mt-8" style="color:var(--paper)">
-          There's a <em class="font-script" style="color:#f5c518">painting</em> studio
-          behind the bamboo.
+          Behind the village, a <em class="font-script" style="color:#f5c518">painting</em> studio.
         </h2>
         <p class="text-sm sm:text-base md:text-lg opacity-85 mt-5 sm:mt-6 max-w-lg">
-          Bondumani Art shares our gate. CNN has visited. Portraits, murals, fabric and a
-          children's Saturday class. If you're a guest, ask at reception — we'll walk you over.
+          Bondumani Art — the gallery, the studio and the name that started it all.
+          CNN has visited. Children learn on Saturdays. Portraits, murals, fabric.
+          Every guest is welcome to walk over.
         </p>
         <a href="../art/" class="btn mt-6 sm:mt-8" style="background:#f5c518;color:#140a1f">
           Enter the art world
@@ -533,7 +654,7 @@
       </div>
       <div class="md:col-span-4 md:col-start-9 relative order-1 md:order-2">
         <div class="nature-img float" style="aspect-ratio:3/4;border-radius:22px;--r:-2deg">
-          <img src="https://placehold.co/600x800/4b1f7a/f5c518?text=Bondumani+Art&font=lora"/>
+          <img src="/paint-class.jpg" alt="Art class"/>
         </div>
       </div>
     </div>
@@ -544,27 +665,28 @@
     <div class="max-w-5xl mx-auto text-center relative">
       <div class="leafline justify-center">✳ 08 · Reserve</div>
       <h2 class="mega text-[clamp(3rem,10vw,9rem)] mt-6 sm:mt-8 break-words">Come <em style="color:var(--green)">stay</em>.</h2>
-      <p class="font-script text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mt-5 sm:mt-6 opacity-85">Reception answers 24 / 7. Tell us the dates, the number of people, and whether you want a bamboo massage on arrival. We'll do the rest.</p>
+      <p class="font-script text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mt-5 sm:mt-6 opacity-85">Reception answers 24 / 7. Tell us the dates, the number of guests, and whether you want a floating lunch or a river massage on arrival. We'll arrange the rest.</p>
 
       <div class="flex flex-wrap gap-3 justify-center mt-8 sm:mt-10">
-        <a class="btn" href="mailto:Bondumanbamboovillage@gmail.com">Email reception</a>
-        <a class="btn ghost" href="tel:+23276403799">+232 76 403799</a>
-        <a class="btn ghost" href="#location">How to find us</a>
+        <a class="btn" href="https://wa.me/23276403799" target="_blank" rel="noopener">WhatsApp +232 76 403 799</a>
+        <a class="btn ghost" href="mailto:Bondumaniart20@gmail.com">Email reception</a>
+        <a class="btn ghost" href="https://www.instagram.com/bondumani_bamboo_village" target="_blank" rel="noopener">@bondumani_bamboo_village</a>
       </div>
 
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t text-left" style="border-color:rgba(12,26,19,0.12)">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t text-left" style="border-color:rgba(14,26,19,0.12)">
         <div>
-          <div class="font-mono text-[10px] opacity-60">reception</div>
-          <div class="font-display text-xl sm:text-2xl mt-2">24 hours · 7 days</div>
-        </div>
-        <div>
-          <div class="font-mono text-[10px] opacity-60">address</div>
-          <div class="font-display text-xl sm:text-2xl mt-2">Peninsular Road, Big Water Village</div>
+          <div class="font-mono text-[10px] opacity-60">location</div>
+          <div class="font-display text-xl sm:text-2xl mt-2">Whale Bay River<br/><span class="font-script text-base opacity-70">between York &amp; Black Johnson</span></div>
         </div>
         <div>
           <div class="font-mono text-[10px] opacity-60">contact</div>
-          <div class="font-display text-xl sm:text-2xl mt-2">+232 76 403799</div>
-          <a class="ulink text-sm mt-2 inline-block break-all" href="mailto:Bondumanbamboovillage@gmail.com">Bondumanbamboovillage@gmail.com</a>
+          <div class="font-display text-xl sm:text-2xl mt-2">+232 76 403 799</div>
+          <a class="ulink text-sm mt-2 inline-block break-all" href="mailto:Bondumaniart20@gmail.com">Bondumaniart20@gmail.com</a>
+        </div>
+        <div>
+          <div class="font-mono text-[10px] opacity-60">socials</div>
+          <a class="font-display text-xl sm:text-2xl mt-2 inline-block ulink" href="https://www.instagram.com/bondumani_bamboo_village" target="_blank" rel="noopener">@bondumani_bamboo_village</a>
+          <a class="font-mono text-[10px] opacity-60 mt-2 block ulink" href="https://www.facebook.com/share/18fi61oiD2/" target="_blank" rel="noopener">facebook →</a>
         </div>
       </div>
     </div>
@@ -575,13 +697,11 @@
     <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 md:gap-10">
       <div class="md:col-span-6">
         <div class="flex items-center gap-3 mb-5 sm:mb-6">
-          <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style="background:var(--green-mist);color:var(--green-deep)">
-            <span class="font-display text-lg" style="line-height:1">B</span>
-          </div>
-          <div class="font-display text-base sm:text-lg" style="color:var(--paper)">Bondumani <em class="font-script" style="color:var(--green-mist)">Resort</em></div>
+          <img src="/logo.png" alt="Bondumani Bamboo Village" class="w-11 h-11 object-contain shrink-0" style="filter:brightness(0) invert(1) opacity(0.9)"/>
+          <div class="font-display text-base sm:text-lg" style="color:var(--paper)">Bondumani <em class="font-script" style="color:var(--green-mist)">Bamboo Village</em></div>
         </div>
-        <h2 class="mega text-[clamp(2rem,6vw,4.4rem)] break-words" style="color:var(--green-mist)">Peninsula <em class="font-script" style="color:#fff">·</em> Sierra Leone.</h2>
-        <p class="max-w-md mt-5 sm:mt-6 opacity-80 text-sm sm:text-base">A bamboo village on Peninsular Road, near Sierra Leone's finest beaches. A 24/7 reception, a signature massage, and a small gallery next door.</p>
+        <h2 class="mega text-[clamp(2rem,6vw,4.4rem)] break-words" style="color:var(--green-mist)">Whale Bay. <em class="font-script" style="color:#fff">Freetown.</em></h2>
+        <p class="max-w-md mt-5 sm:mt-6 opacity-80 text-sm sm:text-base">An eco-conscious bamboo village between York and Black Johnson on the Freetown Peninsula. Founded October 2025. Where the river, the bamboo and the canvas meet.</p>
 
         <div class="flex flex-wrap gap-2 sm:gap-3 mt-6 sm:mt-8">
           <a class="pill" style="background:transparent;border-color:rgba(255,255,255,0.25);color:var(--paper)" href="../">← back to Bondumani</a>
@@ -596,20 +716,28 @@
         </div>
         <div>
           <div class="opacity-60 mb-2">phone</div>
-          <a class="ulink" href="tel:+23276403799">+232 76 403799</a>
+          <a class="ulink" href="tel:+23276403799">+232 76 403 799</a>
         </div>
         <div>
           <div class="opacity-60 mb-2">email</div>
-          <a class="ulink break-all" href="mailto:Bondumanbamboovillage@gmail.com">Bondumanbamboovillage@gmail.com</a>
+          <a class="ulink break-all" href="mailto:Bondumaniart20@gmail.com">Bondumaniart20@gmail.com</a>
         </div>
         <div>
-          <div class="opacity-60 mb-2">address</div>
-          <div>Peninsular Road,<br/>Big Water Village, Freetown, SL</div>
+          <div class="opacity-60 mb-2">location</div>
+          <div>Whale Bay River,<br/>York — Black Johnson,<br/>Freetown Peninsula, SL</div>
+        </div>
+        <div>
+          <div class="opacity-60 mb-2">instagram</div>
+          <a class="ulink" href="https://www.instagram.com/bondumani_bamboo_village" target="_blank" rel="noopener">@bondumani_bamboo_village</a>
+        </div>
+        <div>
+          <div class="opacity-60 mb-2">facebook</div>
+          <a class="ulink" href="https://www.facebook.com/share/18fi61oiD2/" target="_blank" rel="noopener">Bondumani Bamboo Village</a>
         </div>
       </div>
     </div>
     <div class="max-w-7xl mx-auto mt-12 sm:mt-16 pt-6 border-t flex flex-wrap gap-3 sm:gap-4 items-center justify-between font-mono text-[10px] opacity-60" style="border-color:rgba(255,255,255,0.15)">
-      <div>© Bondumani Resort · Freetown, Sierra Leone</div>
+      <div>© Bondumani Bamboo Village · est. October 2025 · Sierra Leone</div>
       <div>site made with care · 2026</div>
     </div>
   </footer>
