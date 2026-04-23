@@ -82,6 +82,10 @@
   .art-img img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;filter:contrast(1.05) saturate(0.8);transition:transform .9s ease}
   .art-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(42,15,76,0.15), rgba(42,15,76,0.55));pointer-events:none}
   .art-img:hover img{transform:scale(1.05)}
+  /* full-colour variant for gallery */
+  .art-img.clean{background:transparent;box-shadow:0 20px 40px -24px rgba(20,10,31,0.35)}
+  .art-img.clean img{mix-blend-mode:normal;filter:none}
+  .art-img.clean::after{display:none}
   /* hero sticker */
   .sticker{
     position:absolute;border-radius:999px;padding:10px 16px;background:var(--yellow);color:var(--ink);
@@ -473,12 +477,12 @@
       </div>
 
       <div class="gallery">
-        <div class="g1 art-img"><img src="/cabin-murals.jpg" alt="Cave-painting mural cabin"/></div>
-        <div class="g2 art-img"><img src="/paint-class.jpg" alt="Painting class guests with their canvases"/></div>
-        <div class="g3 art-img"><img src="/gallery-pool.jpg" alt="On-site art gallery"/></div>
-        <div class="g4 art-img"><img src="/painting-teepee.jpg" alt="Picnic and painting setup"/></div>
-        <div class="g5 art-img"><img src="https://placehold.co/800x800/f5c518/140a1f?text=Face+Paint+Festival&font=lora"/></div>
-        <div class="g6 art-img"><img src="https://placehold.co/700x900/140a1f/f5c518?text=Self+Portrait&font=lora"/></div>
+        <div class="g1 art-img clean"><img src="/PHOTO-2026-04-23-09-17-57.jpg" alt="Bondumani Art — studio work"/></div>
+        <div class="g2 art-img clean"><img src="/PHOTO-2026-04-23-09-17-58.jpg" alt="Bondumani Art — studio work"/></div>
+        <div class="g3 art-img clean"><img src="/PHOTO-2026-04-23-09-17-59.jpg" alt="Bondumani Art — studio work"/></div>
+        <div class="g4 art-img clean"><img src="/PHOTO-2026-04-23-09-18-00.jpg" alt="Bondumani Art — studio work"/></div>
+        <div class="g5 art-img clean"><img src="/PHOTO-2026-04-23-09-18-01.jpg" alt="Bondumani Art — studio work"/></div>
+        <div class="g6 art-img clean"><img src="/PHOTO-2026-04-23-09-18-02.jpg" alt="Bondumani Art — studio work"/></div>
       </div>
     </div>
   </section>
