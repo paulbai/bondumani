@@ -77,15 +77,10 @@
   .rise>span{display:inline-block}
   .rise.active>span{animation:riseIn 1s cubic-bezier(.2,.8,.2,1) both}
 
-  /* image treatment */
-  .art-img{position:relative;overflow:hidden;border-radius:14px;background:#2a0f4c}
-  .art-img img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;filter:contrast(1.05) saturate(0.8);transition:transform .9s ease}
-  .art-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(42,15,76,0.15), rgba(42,15,76,0.55));pointer-events:none}
+  /* image treatment — full colour, no luminosity blend */
+  .art-img{position:relative;overflow:hidden;border-radius:14px;background:#2a0f4c;box-shadow:0 20px 40px -24px rgba(20,10,31,0.35)}
+  .art-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .9s ease}
   .art-img:hover img{transform:scale(1.05)}
-  /* full-colour variant for gallery */
-  .art-img.clean{background:transparent;box-shadow:0 20px 40px -24px rgba(20,10,31,0.35)}
-  .art-img.clean img{mix-blend-mode:normal;filter:none}
-  .art-img.clean::after{display:none}
   /* hero sticker */
   .sticker{
     position:absolute;border-radius:999px;padding:10px 16px;background:var(--yellow);color:var(--ink);
@@ -219,7 +214,7 @@
 
         <!-- portrait tile -->
         <div class="md:col-span-5 md:col-start-8 relative portrait-frame float order-1 md:order-2 mt-4 md:mt-0" style="--r:-2deg">
-          <img src="https://placehold.co/600x760/4b1f7a/f5c518?text=Sahr+Songu+Mbriwa&font=lora" alt="Founder Sahr Songu Mbriwa in studio" style="display:block;width:100%;height:auto;mix-blend-mode:luminosity;opacity:0.85"/>
+          <img src="https://placehold.co/600x760/4b1f7a/f5c518?text=Sahr+Songu+Mbriwa&font=lora" alt="Founder Sahr Songu Mbriwa in studio" style="display:block;width:100%;height:auto"/>
           <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(42,15,76,0.15), rgba(42,15,76,0.5))"></div>
 
           <!-- stickers -->
@@ -497,7 +492,7 @@
         <!-- Sahr -->
         <article class="rounded-2xl overflow-hidden relative" style="background:var(--purple);color:var(--cream)">
           <div class="relative" style="aspect-ratio:4/3">
-            <img src="https://placehold.co/900x680/4b1f7a/f5c518?text=Sahr+in+studio&font=lora" alt="Sahr Songu Mbriwa" style="width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:0.85"/>
+            <img src="https://placehold.co/900x680/4b1f7a/f5c518?text=Sahr+in+studio&font=lora" alt="Sahr Songu Mbriwa" style="width:100%;height:100%;object-fit:cover"/>
             <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 30%,rgba(42,15,76,0.7))"></div>
             <div class="absolute bottom-5 left-5 font-mono text-[10px] opacity-80">co-founder · hyperrealism</div>
             <div class="absolute top-5 right-5">
@@ -520,7 +515,7 @@
         <!-- Aishatu -->
         <article class="rounded-2xl overflow-hidden relative" style="background:var(--yellow);color:var(--ink)">
           <div class="relative" style="aspect-ratio:4/3">
-            <img src="https://placehold.co/900x680/f5c518/4b1f7a?text=Aishatu+painting&font=lora" alt="Aishatu Jalloh" style="width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;opacity:0.9"/>
+            <img src="https://placehold.co/900x680/f5c518/4b1f7a?text=Aishatu+painting&font=lora" alt="Aishatu Jalloh" style="width:100%;height:100%;object-fit:cover"/>
             <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 40%,rgba(245,197,24,0.6))"></div>
             <div class="absolute bottom-5 left-5 font-mono text-[10px] opacity-80">co-founder · full-time artist</div>
             <div class="absolute top-5 right-5">
