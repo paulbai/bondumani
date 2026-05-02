@@ -143,6 +143,206 @@
   .buy-btn.yellow{background:var(--yellow);color:var(--ink)}
   .buy-btn.yellow:hover{background:var(--yellow-deep);color:var(--ink)}
 
+  /* Flot checkout modal */
+  .checkout-modal{
+    position:fixed;inset:0;z-index:200;display:none;
+    align-items:center;justify-content:center;padding:16px;
+  }
+  .checkout-modal.open{display:flex;animation:checkoutFade .3s ease both}
+  @keyframes checkoutFade{from{opacity:0}to{opacity:1}}
+  .checkout-backdrop{
+    position:absolute;inset:0;
+    background:radial-gradient(circle at center, rgba(75,31,122,0.45) 0%, rgba(20,10,31,0.85) 80%);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .checkout-dialog{
+    position:relative;width:min(560px,100%);height:min(820px,92vh);
+    background:#fff;border-radius:20px;overflow:hidden;
+    box-shadow:0 40px 100px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(245,197,24,0.15);
+    animation:checkoutRise .45s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes checkoutRise{from{transform:translateY(24px) scale(0.97);opacity:0}to{transform:none;opacity:1}}
+  .checkout-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 14px 10px 18px;background:var(--cream);
+    border-bottom:1px solid rgba(20,10,31,0.08);
+  }
+  .checkout-bar .lbl{
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--ink);opacity:0.7;
+  }
+  .checkout-bar .lbl strong{color:var(--purple);font-weight:500;letter-spacing:0.04em}
+  .checkout-close{
+    width:34px;height:34px;border-radius:999px;
+    background:var(--ink);color:var(--cream);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:18px;line-height:1;cursor:pointer;border:none;
+    transition:background .25s, transform .25s;
+  }
+  .checkout-close:hover{background:var(--purple);transform:rotate(90deg)}
+  .checkout-frame-wrap{position:relative;width:100%;height:calc(100% - 56px);background:#faf6e7}
+  .checkout-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .checkout-loading{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    color:var(--ink);font-family:'Geist',sans-serif;font-size:13px;pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .checkout-loading.hide{opacity:0}
+  .checkout-loading .spinner{
+    width:28px;height:28px;border-radius:50%;
+    border:2.5px solid rgba(75,31,122,0.18);border-top-color:var(--purple);
+    animation:spin 0.9s linear infinite;
+  }
+  .checkout-fallback{
+    position:absolute;left:0;right:0;bottom:12px;text-align:center;
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--ink);opacity:0.55;
+  }
+  .checkout-fallback a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}
+  body.checkout-open{overflow:hidden}
+
+  /* header cart icon */
+  .cart-icon{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:44px;height:44px;border-radius:999px;
+    background:var(--ink);color:var(--cream);border:none;cursor:pointer;
+    transition:transform .25s, background .25s;
+  }
+  .cart-icon:hover{background:var(--purple);transform:translateY(-1px)}
+  .cart-count{
+    position:absolute;top:-4px;right:-4px;
+    min-width:20px;height:20px;padding:0 6px;
+    border-radius:999px;background:var(--yellow);color:var(--ink);
+    font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;
+    display:inline-flex;align-items:center;justify-content:center;
+    border:2px solid var(--cream);
+    transform:scale(1);transition:transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  .cart-count.empty{transform:scale(0)}
+  .cart-count.bump{animation:countBump .5s cubic-bezier(.2,.8,.2,1)}
+  @keyframes countBump{0%{transform:scale(1)}30%{transform:scale(1.4)}100%{transform:scale(1)}}
+
+  .btn .cart-count{position:relative;top:0;right:0;margin-left:6px;border-color:var(--ink)}
+
+  /* CART DRAWER */
+  .cart-drawer{
+    position:fixed;inset:0;z-index:180;pointer-events:none;
+  }
+  .cart-drawer.open{pointer-events:auto}
+  .cart-backdrop{
+    position:absolute;inset:0;background:rgba(20,10,31,0.55);backdrop-filter:blur(4px);
+    opacity:0;transition:opacity .35s ease;
+  }
+  .cart-drawer.open .cart-backdrop{opacity:1}
+  .cart-panel{
+    position:absolute;top:0;right:0;height:100%;
+    width:min(460px, 100vw);
+    background:var(--cream);color:var(--ink);
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.85,.2,1);
+    box-shadow:-30px 0 80px -20px rgba(20,10,31,0.4);
+  }
+  .cart-drawer.open .cart-panel{transform:translateX(0)}
+  .cart-header{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    padding:22px 22px 18px;border-bottom:1px solid rgba(20,10,31,0.08);
+    background:var(--cream);
+  }
+  .cart-close{
+    width:36px;height:36px;border-radius:999px;
+    background:rgba(20,10,31,0.06);color:var(--ink);
+    display:inline-flex;align-items:center;justify-content:center;
+    border:none;cursor:pointer;transition:background .25s, transform .25s;
+  }
+  .cart-close:hover{background:var(--ink);color:var(--cream);transform:rotate(90deg)}
+  .cart-body{flex:1;overflow-y:auto;padding:18px 22px;-webkit-overflow-scrolling:touch}
+  .cart-body::-webkit-scrollbar{width:6px}
+  .cart-body::-webkit-scrollbar-thumb{background:rgba(20,10,31,0.18);border-radius:6px}
+
+  .cart-empty{
+    text-align:center;padding:60px 12px 40px;
+    display:none;
+  }
+  .cart-drawer.empty .cart-empty{display:block}
+  .cart-drawer.empty .cart-items,
+  .cart-drawer.empty .cart-form,
+  .cart-drawer.empty .cart-footer{display:none}
+
+  .cart-items{
+    list-style:none;padding:0;margin:0 0 22px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .cart-item{
+    display:grid;grid-template-columns:72px 1fr auto;gap:14px;
+    align-items:center;padding:12px;border-radius:14px;
+    background:#fff;border:1px solid rgba(20,10,31,0.08);
+  }
+  .cart-item-img{
+    width:72px;height:90px;border-radius:10px;overflow:hidden;background:#2a0f4c;
+  }
+  .cart-item-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .cart-item-info{min-width:0}
+  .cart-item-info .num{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55}
+  .cart-item-info .ttl{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 80,'WONK' 1;font-size:1.05rem;line-height:1.1;margin-top:2px}
+  .cart-item-info .ttl em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal;color:var(--purple)}
+  .cart-item-info .pr{font-family:'Geist Mono',monospace;font-size:11px;opacity:0.7;margin-top:6px}
+  .cart-item-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  .qty-stepper{
+    display:inline-flex;align-items:center;gap:4px;
+    background:var(--cream);border-radius:999px;padding:3px;
+    border:1px solid rgba(20,10,31,0.1);
+  }
+  .qty-btn{
+    width:24px;height:24px;border-radius:999px;border:none;background:transparent;color:var(--ink);
+    font-family:'Geist Mono',monospace;font-size:14px;line-height:1;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;transition:background .2s;
+  }
+  .qty-btn:hover{background:rgba(20,10,31,0.08)}
+  .qty-val{font-family:'Geist Mono',monospace;font-size:12px;min-width:18px;text-align:center}
+  .item-remove{
+    background:none;border:none;cursor:pointer;
+    font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--ink);opacity:0.5;padding:0;
+    transition:opacity .2s, color .2s;
+  }
+  .item-remove:hover{opacity:1;color:var(--purple)}
+
+  .cart-form{display:flex;flex-direction:column;gap:14px;padding-top:8px;border-top:1px solid rgba(20,10,31,0.08)}
+  .cart-form-title{padding-top:18px}
+  .cart-form .field{display:flex;flex-direction:column;gap:6px}
+  .cart-form .field>span{
+    font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+    opacity:0.7;font-weight:500;
+  }
+  .cart-form input,
+  .cart-form textarea{
+    font-family:'Geist',sans-serif;font-size:14px;color:var(--ink);
+    padding:11px 14px;border-radius:12px;
+    background:#fff;border:1px solid rgba(20,10,31,0.12);
+    transition:border-color .25s, box-shadow .25s;outline:none;resize:vertical;
+    width:100%;
+  }
+  .cart-form textarea{min-height:64px;font-family:inherit}
+  .cart-form input:focus,
+  .cart-form textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(75,31,122,0.12)}
+  .cart-form input.invalid,
+  .cart-form textarea.invalid{border-color:#c93030;box-shadow:0 0 0 3px rgba(201,48,48,0.12)}
+
+  .cart-footer{
+    padding:18px 22px 22px;border-top:1px solid rgba(20,10,31,0.1);
+    background:var(--cream);
+  }
+  .cart-totals{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .cart-count-pill{
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+    background:rgba(20,10,31,0.06);padding:6px 12px;border-radius:999px;
+  }
+  .cart-footer .btn.yellow{padding:14px 20px;font-size:14px}
+
+  @media (max-width:560px){
+    .cart-panel{width:100vw}
+  }
+
   /* bounce label */
   .bubble-label{position:relative;display:inline-block;padding:6px 14px;background:var(--yellow);color:var(--ink);border-radius:999px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase}
   .bubble-label::after{content:'';position:absolute;bottom:-5px;left:18px;width:10px;height:10px;background:var(--yellow);transform:rotate(45deg)}
@@ -197,11 +397,20 @@
       <a class="ulink" href="#visit">visit</a>
     </nav>
 
-    <a href="#marketplace" class="btn yellow shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
-      <span class="hidden sm:inline">Shop the studio</span>
-      <span class="sm:hidden">Shop</span>
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <a href="#marketplace" class="btn yellow !px-4 sm:!px-5 !py-3 sm:!py-4 text-xs sm:text-sm">
+        <span class="hidden sm:inline">Shop the studio</span>
+        <span class="sm:hidden">Shop</span>
+      </a>
+      <button class="cart-icon" data-open-cart aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M3 4h2.5l2.5 12.5h12L22 8H6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9.5" cy="20" r="1.4" fill="currentColor"/>
+          <circle cx="17.5" cy="20" r="1.4" fill="currentColor"/>
+        </svg>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </div>
   </header>
 
   <!-- HERO -->
@@ -496,168 +705,168 @@
         <div>
           <div class="bubble-label">03 · Marketplace</div>
           <h2 class="mega text-[clamp(2.2rem,7vw,6rem)] mt-5 sm:mt-6 break-words">Take one <em class="font-script" style="color:var(--purple)">home</em>.</h2>
-          <p class="font-script text-lg sm:text-xl md:text-2xl opacity-80 mt-4 max-w-xl">Studio works available right now — secure checkout, ships from Freetown.</p>
+          <p class="font-script text-lg sm:text-xl md:text-2xl opacity-80 mt-4 max-w-xl">Add pieces to your cart, share your delivery details, and check out securely — ships from Freetown.</p>
         </div>
-        <a class="btn yellow" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">
-          Open the checkout
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <button class="btn yellow" data-open-cart>
+          Open cart
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
       </div>
 
       <div class="market-grid">
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-01" data-title="Untitled study I" data-medium="Oil on canvas · Freetown studio" data-price="480" data-num="No. 01" data-image="/PHOTO-2026-04-23-09-17-57.jpg">
           <div class="img"><span class="num">No. 01</span><img src="/PHOTO-2026-04-23-09-17-57.jpg" alt="Bondumani Art — original work no. 01"/></div>
           <div class="meta">
             <div class="medium">Oil on canvas · Freetown studio</div>
             <h3 class="title">Untitled <em>study I</em>.</h3>
             <div class="row">
               <div class="price">$ 480 <em>· le 11,000</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-02" data-title="Untitled study II" data-medium="Acrylic on board" data-price="320" data-num="No. 02" data-image="/PHOTO-2026-04-23-09-17-58.jpg">
           <div class="img"><span class="num">No. 02</span><img src="/PHOTO-2026-04-23-09-17-58.jpg" alt="Bondumani Art — original work no. 02"/></div>
           <div class="meta">
             <div class="medium">Acrylic on board</div>
             <h3 class="title">Untitled <em>study II</em>.</h3>
             <div class="row">
               <div class="price">$ 320 <em>· le 7,400</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-03" data-title="Untitled study III" data-medium="Pencil &amp; wash" data-price="180" data-num="No. 03" data-image="/PHOTO-2026-04-23-09-17-58 2.jpg">
           <div class="img"><span class="num">No. 03</span><img src="/PHOTO-2026-04-23-09-17-58 2.jpg" alt="Bondumani Art — original work no. 03"/></div>
           <div class="meta">
             <div class="medium">Pencil &amp; wash</div>
             <h3 class="title">Untitled <em>study III</em>.</h3>
             <div class="row">
               <div class="price">$ 180 <em>· le 4,200</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-04" data-title="Untitled study IV" data-medium="Oil on canvas" data-price="750" data-num="No. 04" data-image="/PHOTO-2026-04-23-09-17-58 3.jpg">
           <div class="img"><span class="num">No. 04</span><img src="/PHOTO-2026-04-23-09-17-58 3.jpg" alt="Bondumani Art — original work no. 04"/></div>
           <div class="meta">
             <div class="medium">Oil on canvas</div>
             <h3 class="title">Untitled <em>study IV</em>.</h3>
             <div class="row">
               <div class="price">$ 750 <em>· le 17,200</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-05" data-title="Untitled study V" data-medium="Mixed media" data-price="540" data-num="No. 05" data-image="/PHOTO-2026-04-23-09-17-59.jpg">
           <div class="img"><span class="num">No. 05</span><img src="/PHOTO-2026-04-23-09-17-59.jpg" alt="Bondumani Art — original work no. 05"/></div>
           <div class="meta">
             <div class="medium">Mixed media</div>
             <h3 class="title">Untitled <em>study V</em>.</h3>
             <div class="row">
               <div class="price">$ 540 <em>· le 12,400</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-06" data-title="Untitled study VI" data-medium="Oil on canvas" data-price="920" data-num="No. 06" data-image="/PHOTO-2026-04-23-09-17-59 2.jpg">
           <div class="img"><span class="num">No. 06</span><img src="/PHOTO-2026-04-23-09-17-59 2.jpg" alt="Bondumani Art — original work no. 06"/></div>
           <div class="meta">
             <div class="medium">Oil on canvas</div>
             <h3 class="title">Untitled <em>study VI</em>.</h3>
             <div class="row">
               <div class="price">$ 920 <em>· le 21,200</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-07" data-title="Untitled study VII" data-medium="Pastel on paper" data-price="250" data-num="No. 07" data-image="/PHOTO-2026-04-23-09-17-59 3.jpg">
           <div class="img"><span class="num">No. 07</span><img src="/PHOTO-2026-04-23-09-17-59 3.jpg" alt="Bondumani Art — original work no. 07"/></div>
           <div class="meta">
             <div class="medium">Pastel on paper</div>
             <h3 class="title">Untitled <em>study VII</em>.</h3>
             <div class="row">
               <div class="price">$ 250 <em>· le 5,800</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-08" data-title="Untitled study VIII" data-medium="Oil on canvas" data-price="660" data-num="No. 08" data-image="/PHOTO-2026-04-23-09-18-00.jpg">
           <div class="img"><span class="num">No. 08</span><img src="/PHOTO-2026-04-23-09-18-00.jpg" alt="Bondumani Art — original work no. 08"/></div>
           <div class="meta">
             <div class="medium">Oil on canvas</div>
             <h3 class="title">Untitled <em>study VIII</em>.</h3>
             <div class="row">
               <div class="price">$ 660 <em>· le 15,200</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-09" data-title="Untitled study IX" data-medium="Hand-painted fabric" data-price="290" data-num="No. 09" data-image="/PHOTO-2026-04-23-09-18-00 2.jpg">
           <div class="img"><span class="num">No. 09</span><img src="/PHOTO-2026-04-23-09-18-00 2.jpg" alt="Bondumani Art — original work no. 09"/></div>
           <div class="meta">
             <div class="medium">Hand-painted fabric</div>
             <h3 class="title">Untitled <em>study IX</em>.</h3>
             <div class="row">
               <div class="price">$ 290 <em>· le 6,700</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-10" data-title="Untitled study X" data-medium="Oil on canvas · large" data-price="1200" data-num="No. 10" data-image="/PHOTO-2026-04-23-09-18-00 3.jpg">
           <div class="img"><span class="num">No. 10</span><img src="/PHOTO-2026-04-23-09-18-00 3.jpg" alt="Bondumani Art — original work no. 10"/></div>
           <div class="meta">
             <div class="medium">Oil on canvas · large</div>
             <h3 class="title">Untitled <em>study X</em>.</h3>
             <div class="row">
               <div class="price">$ 1,200 <em>· le 27,600</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-11" data-title="Untitled study XI" data-medium="Acrylic on canvas" data-price="380" data-num="No. 11" data-image="/PHOTO-2026-04-23-09-18-01.jpg">
           <div class="img"><span class="num">No. 11</span><img src="/PHOTO-2026-04-23-09-18-01.jpg" alt="Bondumani Art — original work no. 11"/></div>
           <div class="meta">
             <div class="medium">Acrylic on canvas</div>
             <h3 class="title">Untitled <em>study XI</em>.</h3>
             <div class="row">
               <div class="price">$ 380 <em>· le 8,700</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-12" data-title="Untitled study XII" data-medium="Pencil portrait" data-price="220" data-num="No. 12" data-image="/PHOTO-2026-04-23-09-18-01 2.jpg">
           <div class="img"><span class="num">No. 12</span><img src="/PHOTO-2026-04-23-09-18-01 2.jpg" alt="Bondumani Art — original work no. 12"/></div>
           <div class="meta">
             <div class="medium">Pencil portrait</div>
             <h3 class="title">Untitled <em>study XII</em>.</h3>
             <div class="row">
               <div class="price">$ 220 <em>· le 5,100</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
 
-        <article class="market-card">
+        <article class="market-card" data-id="no-13" data-title="Untitled study XIII" data-medium="Oil on canvas" data-price="580" data-num="No. 13" data-image="/PHOTO-2026-04-23-09-18-02.jpg">
           <div class="img"><span class="num">No. 13</span><img src="/PHOTO-2026-04-23-09-18-02.jpg" alt="Bondumani Art — original work no. 13"/></div>
           <div class="meta">
             <div class="medium">Oil on canvas</div>
             <h3 class="title">Untitled <em>study XIII</em>.</h3>
             <div class="row">
               <div class="price">$ 580 <em>· le 13,300</em></div>
-              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+              <button class="buy-btn add-btn" data-add-to-cart>Add to cart</button>
             </div>
           </div>
         </article>
@@ -666,7 +875,7 @@
 
       <div class="mt-10 sm:mt-12 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] opacity-60">
         <span>* placeholder pricing — final prices to follow · checkout secured by flot</span>
-        <a class="ulink" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">pay.flotme.ai/bondumaniart →</a>
+        <button class="ulink" data-open-cart style="background:none;border:none;padding:0;cursor:pointer;font:inherit;color:inherit">view cart →</button>
       </div>
     </div>
   </section>
@@ -862,6 +1071,94 @@
       <div>Built and Powered by <a class="ulink" href="https://www.flotme.ai/business" target="_blank" rel="noopener">Flot</a></div>
     </div>
   </footer>
+
+  <!-- CART DRAWER -->
+  <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-backdrop" data-close-cart></div>
+    <div class="cart-panel" role="dialog" aria-label="Your cart">
+      <header class="cart-header">
+        <div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] opacity-60">Your cart</div>
+          <div class="font-display text-2xl mt-1">Bondumani <em class="font-script" style="color:var(--purple)">Art</em></div>
+        </div>
+        <button class="cart-close" data-close-cart aria-label="Close cart">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+
+      <div class="cart-body">
+
+        <!-- Empty state -->
+        <div class="cart-empty" data-cart-empty>
+          <div class="font-display text-3xl">Cart is empty.</div>
+          <p class="font-script text-lg opacity-70 mt-3">Browse the marketplace and add a piece to begin.</p>
+          <button class="btn yellow mt-6" data-close-cart>Browse marketplace</button>
+        </div>
+
+        <!-- Items list (rendered by JS) -->
+        <ul class="cart-items" data-cart-items></ul>
+
+        <!-- Customer details -->
+        <form class="cart-form" data-cart-form novalidate>
+          <div class="cart-form-title">
+            <span class="font-mono text-[10px] uppercase tracking-[0.2em] opacity-60">Step 02</span>
+            <h3 class="font-display text-xl mt-1">Delivery details</h3>
+          </div>
+          <label class="field">
+            <span>Full name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="e.g. Aminata Kamara"/>
+          </label>
+          <label class="field">
+            <span>Phone number</span>
+            <input type="tel" name="phone" required autocomplete="tel" placeholder="+232 76 …"/>
+          </label>
+          <label class="field">
+            <span>Delivery address</span>
+            <textarea name="address" required rows="3" autocomplete="street-address" placeholder="Street, city, country"></textarea>
+          </label>
+          <label class="field">
+            <span>Notes <span style="opacity:0.5;font-weight:400">(optional)</span></span>
+            <textarea name="notes" rows="2" placeholder="Framing, gift wrap, delivery preference…"></textarea>
+          </label>
+        </form>
+
+      </div>
+
+      <footer class="cart-footer" data-cart-summary>
+        <div class="cart-totals">
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.2em] opacity-60">Total</div>
+            <div class="font-display text-3xl mt-1" data-cart-total>$ 0</div>
+          </div>
+          <div class="cart-count-pill"><span data-cart-items-count>0</span> items</div>
+        </div>
+        <button class="btn yellow w-full justify-center" data-checkout>
+          Proceed to checkout
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="font-mono text-[9px] uppercase tracking-[0.18em] opacity-55 text-center mt-3">secure checkout · powered by <a class="ulink" href="https://www.flotme.ai" target="_blank" rel="noopener">flot</a></p>
+      </footer>
+    </div>
+  </aside>
+
+  <!-- FLOT CHECKOUT MODAL -->
+  <div id="checkout-modal" class="checkout-modal" aria-hidden="true">
+    <div class="checkout-backdrop" data-close-checkout></div>
+    <div class="checkout-dialog" role="dialog" aria-label="Flot secure checkout">
+      <div class="checkout-bar">
+        <div class="lbl">Secure checkout · <strong>flot</strong> · <span data-checkout-total>$ 0</span></div>
+        <div class="flex items-center gap-2">
+          <a class="ulink font-mono text-[10px]" data-checkout-whatsapp href="#" target="_blank" rel="noopener">share order via whatsapp</a>
+          <button class="checkout-close" data-close-checkout aria-label="Close checkout">×</button>
+        </div>
+      </div>
+      <div class="checkout-frame-wrap">
+        <div class="checkout-loading" data-checkout-loading><div class="spinner"></div><div>Loading checkout…</div></div>
+        <iframe id="checkout-frame" src="about:blank" allow="payment" title="Flot secure checkout"></iframe>
+        <div class="checkout-fallback">popup blocked? <a data-checkout-fallback href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">open in a new tab →</a></div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
