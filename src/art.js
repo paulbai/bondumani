@@ -60,7 +60,7 @@ gsap.utils.toArray('.market-card').forEach((card, i) => {
 /* ---------- CART + CHECKOUT ---------- */
 const FLOT_BASE = 'https://pay.flotme.ai/bondumaniart';
 const STUDIO_WHATSAPP = '23276403799';
-const CART_KEY = 'bondumani_art_cart_v1';
+const CART_KEY = 'bondumani_art_cart_v2';
 const CUSTOMER_KEY = 'bondumani_art_customer_v1';
 
 let cart = loadCart();
@@ -75,7 +75,7 @@ function saveCustomer() { localStorage.setItem(CUSTOMER_KEY, JSON.stringify(cust
 
 function cartTotal() { return cart.reduce((s, it) => s + (it.price * it.qty), 0); }
 function cartCount() { return cart.reduce((s, it) => s + it.qty, 0); }
-function fmt(n) { return '$ ' + Number(n).toLocaleString('en-US'); }
+function fmt(n) { return 'Le ' + Number(n).toLocaleString('en-US'); }
 
 function addToCart(card) {
   const id = card.dataset.id;
@@ -229,10 +229,10 @@ function buildOrderMessage(total) {
   lines.push('');
   lines.push('🎨 ITEMS');
   cart.forEach(it => {
-    lines.push(`• ${it.num} — ${it.title} (${it.medium}) × ${it.qty} = $ ${(it.price * it.qty).toLocaleString('en-US')}`);
+    lines.push(`• ${it.num} — ${it.title} (${it.medium}) × ${it.qty} = Le ${(it.price * it.qty).toLocaleString('en-US')}`);
   });
   lines.push('');
-  lines.push(`💳 TOTAL: $ ${total.toLocaleString('en-US')}`);
+  lines.push(`💳 TOTAL: Le ${total.toLocaleString('en-US')}`);
   lines.push('');
   lines.push('📦 DELIVERY');
   lines.push(`Name: ${customer.name || ''}`);
