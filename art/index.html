@@ -103,16 +103,45 @@
   @media (min-width:640px){.section-pad{padding:80px 24px}}
   @media (min-width:768px){.section-pad{padding:120px 56px}}
 
-  /* gallery mason-ish */
-  .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-  .g1{grid-column:span 5;aspect-ratio:4/5}
-  .g2{grid-column:span 4;aspect-ratio:3/4;margin-top:48px}
-  .g3{grid-column:span 3;aspect-ratio:4/5}
-  .g4{grid-column:span 4;aspect-ratio:5/4;margin-top:24px}
-  .g5{grid-column:span 4;aspect-ratio:1/1}
-  .g6{grid-column:span 4;aspect-ratio:3/4;margin-top:-40px}
-  @media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);gap:10px}.g1,.g2,.g3,.g4,.g5,.g6{grid-column:span 1;margin-top:0}}
-  @media (max-width:420px){.gallery{grid-template-columns:1fr}}
+  /* marketplace grid */
+  .market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media (max-width:900px){.market-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
+  @media (max-width:520px){.market-grid{grid-template-columns:1fr;gap:14px}}
+
+  .market-card{
+    position:relative;background:var(--cream);border-radius:18px;overflow:hidden;
+    border:1px solid rgba(20,10,31,0.08);
+    display:flex;flex-direction:column;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease;
+    box-shadow:0 4px 12px -6px rgba(20,10,31,0.08);
+  }
+  .market-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(20,10,31,0.28)}
+  .market-card .img{aspect-ratio:4/5;overflow:hidden;background:#2a0f4c;position:relative}
+  .market-card .img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .9s ease}
+  .market-card:hover .img img{transform:scale(1.05)}
+  .market-card .img .num{
+    position:absolute;top:12px;left:12px;
+    background:rgba(20,10,31,0.85);color:var(--cream);
+    font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+    padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px);
+  }
+  .market-card .meta{padding:18px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .market-card .medium{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55}
+  .market-card .title{font-family:'Fraunces',serif;font-variation-settings:'SOFT' 80,'WONK' 1;letter-spacing:-0.03em;font-size:1.25rem;line-height:1.05;margin-top:4px}
+  .market-card .title em{font-family:'Instrument Serif',serif;font-style:italic;font-variation-settings:normal;color:var(--purple)}
+  .market-card .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:14px}
+  .market-card .price{font-family:'Fraunces',serif;font-size:1.4rem;letter-spacing:-0.02em;color:var(--ink)}
+  .market-card .price em{font-family:'Instrument Serif',serif;font-style:italic;font-size:0.85em;opacity:0.6;margin-left:2px}
+  .buy-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:9px 16px;border-radius:999px;
+    background:var(--ink);color:var(--cream);
+    font-family:'Geist',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.01em;
+    transition:transform .25s, background .25s;white-space:nowrap;
+  }
+  .buy-btn:hover{background:var(--purple);transform:translateY(-1px)}
+  .buy-btn.yellow{background:var(--yellow);color:var(--ink)}
+  .buy-btn.yellow:hover{background:var(--yellow-deep);color:var(--ink)}
 
   /* bounce label */
   .bubble-label{position:relative;display:inline-block;padding:6px 14px;background:var(--yellow);color:var(--ink);border-radius:999px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase}
@@ -162,15 +191,15 @@
     <nav class="hidden lg:flex items-center gap-6 font-mono text-[11px]">
       <a class="ulink" href="#story">story</a>
       <a class="ulink" href="#work">work</a>
+      <a class="ulink" href="#marketplace">shop</a>
       <a class="ulink" href="#classes">classes</a>
       <a class="ulink" href="#bamboo">bamboo</a>
-      <a class="ulink" href="#press">press</a>
       <a class="ulink" href="#visit">visit</a>
     </nav>
 
-    <a href="#commission" class="btn yellow shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
-      <span class="hidden sm:inline">Commission a piece</span>
-      <span class="sm:hidden">Commission</span>
+    <a href="#marketplace" class="btn yellow shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
+      <span class="hidden sm:inline">Shop the studio</span>
+      <span class="sm:hidden">Shop</span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </header>
@@ -205,10 +234,10 @@
           </p>
 
           <div class="flex flex-wrap gap-3 mt-6 sm:mt-8">
-            <a href="#commission" class="btn">Start a commission
+            <a href="#marketplace" class="btn yellow">Shop the marketplace
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="#work" class="btn" style="background:transparent;color:var(--ink);border:1px solid rgba(20,10,31,0.2)">See our work</a>
+            <a href="#commission" class="btn" style="background:transparent;color:var(--ink);border:1px solid rgba(20,10,31,0.2)">Or commission a piece</a>
           </div>
         </div>
 
@@ -460,24 +489,184 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" class="section-pad">
+  <!-- MARKETPLACE -->
+  <section id="marketplace" class="section-pad">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-end justify-between flex-wrap gap-4 sm:gap-6 mb-8 sm:mb-10">
         <div>
-          <div class="bubble-label">03 · Selected work</div>
-          <h2 class="mega text-[clamp(2.2rem,7vw,6rem)] mt-5 sm:mt-6 break-words">A small <em class="font-script" style="color:var(--purple)">loud</em> gallery.</h2>
+          <div class="bubble-label">03 · Marketplace</div>
+          <h2 class="mega text-[clamp(2.2rem,7vw,6rem)] mt-5 sm:mt-6 break-words">Take one <em class="font-script" style="color:var(--purple)">home</em>.</h2>
+          <p class="font-script text-lg sm:text-xl md:text-2xl opacity-80 mt-4 max-w-xl">Studio works available right now — secure checkout, ships from Freetown.</p>
         </div>
-        <a class="ulink font-mono text-xs" href="#commission">request full portfolio →</a>
+        <a class="btn yellow" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">
+          Open the checkout
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
 
-      <div class="gallery">
-        <div class="g1 art-img clean"><img src="/PHOTO-2026-04-23-09-17-57.jpg" alt="Bondumani Art — studio work"/></div>
-        <div class="g2 art-img clean"><img src="/PHOTO-2026-04-23-09-17-58.jpg" alt="Bondumani Art — studio work"/></div>
-        <div class="g3 art-img clean"><img src="/PHOTO-2026-04-23-09-17-59.jpg" alt="Bondumani Art — studio work"/></div>
-        <div class="g4 art-img clean"><img src="/PHOTO-2026-04-23-09-18-00.jpg" alt="Bondumani Art — studio work"/></div>
-        <div class="g5 art-img clean"><img src="/PHOTO-2026-04-23-09-18-01.jpg" alt="Bondumani Art — studio work"/></div>
-        <div class="g6 art-img clean"><img src="/PHOTO-2026-04-23-09-18-02.jpg" alt="Bondumani Art — studio work"/></div>
+      <div class="market-grid">
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 01</span><img src="/PHOTO-2026-04-23-09-17-57.jpg" alt="Bondumani Art — original work no. 01"/></div>
+          <div class="meta">
+            <div class="medium">Oil on canvas · Freetown studio</div>
+            <h3 class="title">Untitled <em>study I</em>.</h3>
+            <div class="row">
+              <div class="price">$ 480 <em>· le 11,000</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 02</span><img src="/PHOTO-2026-04-23-09-17-58.jpg" alt="Bondumani Art — original work no. 02"/></div>
+          <div class="meta">
+            <div class="medium">Acrylic on board</div>
+            <h3 class="title">Untitled <em>study II</em>.</h3>
+            <div class="row">
+              <div class="price">$ 320 <em>· le 7,400</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 03</span><img src="/PHOTO-2026-04-23-09-17-58 2.jpg" alt="Bondumani Art — original work no. 03"/></div>
+          <div class="meta">
+            <div class="medium">Pencil &amp; wash</div>
+            <h3 class="title">Untitled <em>study III</em>.</h3>
+            <div class="row">
+              <div class="price">$ 180 <em>· le 4,200</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 04</span><img src="/PHOTO-2026-04-23-09-17-58 3.jpg" alt="Bondumani Art — original work no. 04"/></div>
+          <div class="meta">
+            <div class="medium">Oil on canvas</div>
+            <h3 class="title">Untitled <em>study IV</em>.</h3>
+            <div class="row">
+              <div class="price">$ 750 <em>· le 17,200</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 05</span><img src="/PHOTO-2026-04-23-09-17-59.jpg" alt="Bondumani Art — original work no. 05"/></div>
+          <div class="meta">
+            <div class="medium">Mixed media</div>
+            <h3 class="title">Untitled <em>study V</em>.</h3>
+            <div class="row">
+              <div class="price">$ 540 <em>· le 12,400</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 06</span><img src="/PHOTO-2026-04-23-09-17-59 2.jpg" alt="Bondumani Art — original work no. 06"/></div>
+          <div class="meta">
+            <div class="medium">Oil on canvas</div>
+            <h3 class="title">Untitled <em>study VI</em>.</h3>
+            <div class="row">
+              <div class="price">$ 920 <em>· le 21,200</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 07</span><img src="/PHOTO-2026-04-23-09-17-59 3.jpg" alt="Bondumani Art — original work no. 07"/></div>
+          <div class="meta">
+            <div class="medium">Pastel on paper</div>
+            <h3 class="title">Untitled <em>study VII</em>.</h3>
+            <div class="row">
+              <div class="price">$ 250 <em>· le 5,800</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 08</span><img src="/PHOTO-2026-04-23-09-18-00.jpg" alt="Bondumani Art — original work no. 08"/></div>
+          <div class="meta">
+            <div class="medium">Oil on canvas</div>
+            <h3 class="title">Untitled <em>study VIII</em>.</h3>
+            <div class="row">
+              <div class="price">$ 660 <em>· le 15,200</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 09</span><img src="/PHOTO-2026-04-23-09-18-00 2.jpg" alt="Bondumani Art — original work no. 09"/></div>
+          <div class="meta">
+            <div class="medium">Hand-painted fabric</div>
+            <h3 class="title">Untitled <em>study IX</em>.</h3>
+            <div class="row">
+              <div class="price">$ 290 <em>· le 6,700</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 10</span><img src="/PHOTO-2026-04-23-09-18-00 3.jpg" alt="Bondumani Art — original work no. 10"/></div>
+          <div class="meta">
+            <div class="medium">Oil on canvas · large</div>
+            <h3 class="title">Untitled <em>study X</em>.</h3>
+            <div class="row">
+              <div class="price">$ 1,200 <em>· le 27,600</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 11</span><img src="/PHOTO-2026-04-23-09-18-01.jpg" alt="Bondumani Art — original work no. 11"/></div>
+          <div class="meta">
+            <div class="medium">Acrylic on canvas</div>
+            <h3 class="title">Untitled <em>study XI</em>.</h3>
+            <div class="row">
+              <div class="price">$ 380 <em>· le 8,700</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 12</span><img src="/PHOTO-2026-04-23-09-18-01 2.jpg" alt="Bondumani Art — original work no. 12"/></div>
+          <div class="meta">
+            <div class="medium">Pencil portrait</div>
+            <h3 class="title">Untitled <em>study XII</em>.</h3>
+            <div class="row">
+              <div class="price">$ 220 <em>· le 5,100</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="market-card">
+          <div class="img"><span class="num">No. 13</span><img src="/PHOTO-2026-04-23-09-18-02.jpg" alt="Bondumani Art — original work no. 13"/></div>
+          <div class="meta">
+            <div class="medium">Oil on canvas</div>
+            <h3 class="title">Untitled <em>study XIII</em>.</h3>
+            <div class="row">
+              <div class="price">$ 580 <em>· le 13,300</em></div>
+              <a class="buy-btn" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">Buy →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="mt-10 sm:mt-12 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] opacity-60">
+        <span>* placeholder pricing — final prices to follow · checkout secured by flot</span>
+        <a class="ulink" href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">pay.flotme.ai/bondumaniart →</a>
       </div>
     </div>
   </section>

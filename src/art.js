@@ -45,6 +45,18 @@ gsap.utils.toArray('.art-img').forEach((img, i) => {
   });
 });
 
+/* marketplace card scroll reveal */
+gsap.utils.toArray('.market-card').forEach((card, i) => {
+  gsap.from(card, {
+    y: 60,
+    opacity: 0,
+    duration: 0.9,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: card, start: 'top 92%', once: true },
+    delay: (i % 3) * 0.06
+  });
+});
+
 /* founder cards rise */
 gsap.from('article', {
   y: 60,
