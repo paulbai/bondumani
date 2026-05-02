@@ -168,6 +168,205 @@
   }
 
   .logo-wm{height:60px;width:auto}
+
+  /* Room card → bookable affordance */
+  .rm-card{cursor:pointer}
+  .rm-card .book-cta{
+    position:absolute;top:14px;right:14px;z-index:3;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:7px 13px;border-radius:999px;
+    background:rgba(255,249,237,0.95);color:var(--ink);
+    font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;
+    opacity:0;transform:translateY(-4px);
+    transition:opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1), background .25s;
+    pointer-events:none;
+  }
+  .rm-card:hover .book-cta,.rm-card:focus-visible .book-cta{opacity:1;transform:translateY(0)}
+  .rm-card .book-cta::after{content:'→';opacity:0.7;font-size:11px}
+
+  /* BOOKING DRAWER */
+  .bk-drawer{position:fixed;inset:0;z-index:180;pointer-events:none}
+  .bk-drawer.open{pointer-events:auto}
+  .bk-backdrop{
+    position:absolute;inset:0;background:rgba(14,26,19,0.55);backdrop-filter:blur(4px);
+    opacity:0;transition:opacity .35s ease;
+  }
+  .bk-drawer.open .bk-backdrop{opacity:1}
+  .bk-panel{
+    position:absolute;top:0;right:0;height:100%;
+    width:min(520px,100vw);
+    background:var(--paper);color:var(--ink);
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.85,.2,1);
+    box-shadow:-30px 0 80px -20px rgba(14,26,19,0.4);
+  }
+  .bk-drawer.open .bk-panel{transform:translateX(0)}
+  .bk-header{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    padding:22px 22px 18px;border-bottom:1px solid rgba(14,26,19,0.08);
+    background:var(--paper);
+  }
+  .bk-close{
+    width:36px;height:36px;border-radius:999px;
+    background:rgba(14,26,19,0.06);color:var(--ink);
+    display:inline-flex;align-items:center;justify-content:center;
+    border:none;cursor:pointer;transition:background .25s, transform .25s;
+  }
+  .bk-close:hover{background:var(--ink);color:var(--paper);transform:rotate(90deg)}
+  .bk-body{flex:1;overflow-y:auto;padding:18px 22px;-webkit-overflow-scrolling:touch}
+  .bk-body::-webkit-scrollbar{width:6px}
+  .bk-body::-webkit-scrollbar-thumb{background:rgba(14,26,19,0.18);border-radius:6px}
+
+  .bk-section{padding:14px 0;border-top:1px solid rgba(14,26,19,0.08)}
+  .bk-section:first-child{border-top:none;padding-top:6px}
+  .bk-section-head{
+    font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;
+    opacity:0.65;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .bk-section-head h4{font-family:'Fraunces',serif;font-size:1.2rem;letter-spacing:-0.02em;color:var(--ink);opacity:1;margin-top:4px}
+
+  .bk-rooms{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;border:0}
+  .bk-room{
+    display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;
+    padding:10px;border-radius:14px;background:#fff;
+    border:1px solid rgba(14,26,19,0.1);cursor:pointer;
+    transition:border-color .25s, box-shadow .25s, transform .2s;
+  }
+  .bk-room:hover{transform:translateY(-1px);box-shadow:0 8px 16px -10px rgba(14,26,19,0.18)}
+  .bk-room input{position:absolute;opacity:0;pointer-events:none}
+  .bk-room.selected{border-color:var(--green);box-shadow:0 0 0 2px rgba(58,90,63,0.18)}
+  .bk-room-img{width:60px;height:74px;border-radius:10px;overflow:hidden;background:var(--green-deep)}
+  .bk-room-img img{width:100%;height:100%;object-fit:cover}
+  .bk-room-info .nm{font-family:'Fraunces',serif;font-size:1rem;letter-spacing:-0.02em}
+  .bk-room-info .nm em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--green)}
+  .bk-room-info .tg{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-top:3px}
+  .bk-room-rate{font-family:'Geist Mono',monospace;font-size:11px;color:var(--green);font-weight:500;text-align:right;line-height:1.3}
+  .bk-room-rate small{opacity:0.55;font-weight:400}
+
+  .bk-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .bk-field{display:flex;flex-direction:column;gap:6px}
+  .bk-field>span{
+    font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+    opacity:0.65;font-weight:500;
+  }
+  .bk-input{
+    font-family:'Geist',sans-serif;font-size:14px;color:var(--ink);
+    padding:11px 14px;border-radius:12px;
+    background:#fff;border:1px solid rgba(14,26,19,0.12);
+    outline:none;transition:border-color .25s, box-shadow .25s;
+    width:100%;
+  }
+  .bk-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(58,90,63,0.14)}
+  .bk-input.invalid{border-color:#c93030;box-shadow:0 0 0 3px rgba(201,48,48,0.12)}
+  .bk-stepper{
+    display:inline-flex;align-items:center;gap:4px;
+    background:#fff;border-radius:999px;padding:3px 4px;
+    border:1px solid rgba(14,26,19,0.1);align-self:flex-start;
+  }
+  .bk-stepper button{
+    width:28px;height:28px;border-radius:999px;border:none;background:transparent;color:var(--ink);
+    font-family:'Geist Mono',monospace;font-size:14px;line-height:1;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;transition:background .2s;
+  }
+  .bk-stepper button:hover{background:rgba(14,26,19,0.08)}
+  .bk-stepper .v{font-family:'Geist Mono',monospace;font-size:13px;min-width:22px;text-align:center}
+
+  .bk-experiences{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;border:0}
+  .bk-exp{
+    display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;
+    padding:10px 12px;border-radius:12px;background:#fff;
+    border:1px solid rgba(14,26,19,0.08);cursor:pointer;
+    transition:border-color .25s, background .2s;
+  }
+  .bk-exp:hover{background:#fffdf6}
+  .bk-exp input{margin:0;accent-color:var(--green)}
+  .bk-exp.selected{border-color:var(--green);background:rgba(58,90,63,0.04)}
+  .bk-exp-info{min-width:0}
+  .bk-exp-info .nm{font-family:'Geist',sans-serif;font-size:13px;font-weight:500}
+  .bk-exp-info .meta{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.55;margin-top:2px}
+  .bk-exp-price{font-family:'Geist Mono',monospace;font-size:11px;color:var(--green);text-align:right}
+
+  .bk-footer{
+    padding:18px 22px 22px;border-top:1px solid rgba(14,26,19,0.1);background:var(--paper);
+  }
+  .bk-summary{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .bk-summary-row{display:flex;justify-content:space-between;font-family:'Geist Mono',monospace;font-size:11px;opacity:0.7}
+  .bk-summary-total{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    padding-top:10px;border-top:1px solid rgba(14,26,19,0.1);margin-top:6px;
+  }
+  .bk-summary-total .lbl{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.65}
+  .bk-summary-total .val{font-family:'Fraunces',serif;font-size:2rem;letter-spacing:-0.02em;color:var(--ink);line-height:1}
+  .bk-footer .btn{padding:14px 20px;font-size:14px;width:100%;justify-content:center}
+
+  /* Booking trigger pill (header) cart-like badge */
+  .bk-pill-icon{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:42px;height:42px;border-radius:999px;
+    background:var(--ink);color:var(--paper);border:none;cursor:pointer;
+    transition:transform .25s, background .25s;
+  }
+  .bk-pill-icon:hover{background:var(--green-deep);transform:translateY(-1px)}
+
+  /* FLOT CHECKOUT MODAL */
+  .checkout-modal{
+    position:fixed;inset:0;z-index:200;display:none;
+    align-items:center;justify-content:center;padding:16px;
+  }
+  .checkout-modal.open{display:flex;animation:checkoutFade .3s ease both}
+  @keyframes checkoutFade{from{opacity:0}to{opacity:1}}
+  .checkout-backdrop{
+    position:absolute;inset:0;
+    background:radial-gradient(circle at center, rgba(58,90,63,0.45) 0%, rgba(14,26,19,0.85) 80%);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .checkout-dialog{
+    position:relative;width:min(580px,100%);height:min(820px,92vh);
+    background:#fff;border-radius:20px;overflow:hidden;
+    box-shadow:0 40px 100px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(58,90,63,0.18);
+    animation:checkoutRise .45s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes checkoutRise{from{transform:translateY(24px) scale(0.97);opacity:0}to{transform:none;opacity:1}}
+  .checkout-bar{
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    padding:12px 14px 10px 18px;background:var(--paper);
+    border-bottom:1px solid rgba(14,26,19,0.08);
+  }
+  .checkout-bar .lbl{
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--ink);opacity:0.7;
+  }
+  .checkout-bar .lbl strong{color:var(--green);font-weight:500;letter-spacing:0.04em}
+  .checkout-close{
+    width:34px;height:34px;border-radius:999px;
+    background:var(--ink);color:var(--paper);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:18px;line-height:1;cursor:pointer;border:none;
+    transition:background .25s, transform .25s;
+  }
+  .checkout-close:hover{background:var(--green-deep);transform:rotate(90deg)}
+  .checkout-frame-wrap{position:relative;width:100%;height:calc(100% - 56px);background:var(--paper)}
+  .checkout-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .checkout-loading{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    color:var(--ink);font-family:'Geist',sans-serif;font-size:13px;pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .checkout-loading.hide{opacity:0}
+  .checkout-loading .spinner{
+    width:28px;height:28px;border-radius:50%;
+    border:2.5px solid rgba(58,90,63,0.18);border-top-color:var(--green);
+    animation:spin 0.9s linear infinite;
+  }
+  .checkout-fallback{
+    position:absolute;left:0;right:0;bottom:12px;text-align:center;
+    font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--ink);opacity:0.55;
+  }
+  .checkout-fallback a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+  body.checkout-open,body.bk-open{overflow:hidden}
+
+  @media (max-width:560px){.bk-panel{width:100vw}.bk-grid-2{grid-template-columns:1fr}}
 </style>
 </head>
 <body class="bg-misty">
@@ -191,14 +390,14 @@
       <a class="ulink" href="#experiences">experiences</a>
       <a class="ulink" href="#gallery">gallery</a>
       <a class="ulink" href="#location">find us</a>
-      <a class="ulink" href="#book">book</a>
+      <a class="ulink" href="#stay" data-open-booking>book</a>
     </nav>
 
-    <a href="#book" class="btn walnut shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm">
-      <span class="hidden sm:inline">Book a stay</span>
+    <button class="btn walnut shrink-0 !px-4 sm:!px-6 !py-3 sm:!py-4 text-xs sm:text-sm" data-open-booking>
+      <span class="hidden sm:inline">Reserve &amp; pay</span>
       <span class="sm:hidden">Book</span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    </button>
   </header>
 
   <!-- HERO -->
@@ -369,60 +568,65 @@
 
       <div class="rm">
         <!-- Riverfront large -->
-        <article class="rm-card rm-big">
+        <article class="rm-card rm-big" data-book-room="riverfront-large" tabindex="0" role="button" aria-label="Book Riverfront large">
+          <span class="book-cta">Book</span>
           <div class="bg"><img src="/cabin-murals.jpg" alt="Riverfront cabin with murals"/></div>
           <div>
             <div class="tag">suite · 01</div>
             <h3 style="font-size:clamp(2rem,4vw,3.2rem)">Riverfront <em>large</em>.</h3>
             <p class="mt-2 max-w-md text-sm opacity-90">The signature suite — hand-painted walls in ochre cave-motifs, woven light, river window. The whole Whale Bay in one room.</p>
-            <div class="price">le 4,000 <em>· $180 / night</em></div>
+            <div class="price">Le 4,000 <em>· per night</em></div>
           </div>
         </article>
 
         <!-- Riverfront small -->
-        <article class="rm-card rm-med">
+        <article class="rm-card rm-med" data-book-room="riverfront-small" tabindex="0" role="button" aria-label="Book Riverfront small">
+          <span class="book-cta">Book</span>
           <div class="bg"><img src="/cabin-green.jpg" alt="Riverfront small cabin"/></div>
           <div>
             <div class="tag">suite · 02</div>
             <h3 style="font-size:clamp(1.4rem,2.4vw,1.9rem)">Riverfront <em>small</em>.</h3>
-            <div class="price">le 3,000 <em>· $140</em></div>
+            <div class="price">Le 3,000 <em>· per night</em></div>
           </div>
         </article>
 
         <!-- Double upstairs -->
-        <article class="rm-card rm-sq">
+        <article class="rm-card rm-sq" data-book-room="upstairs-double" tabindex="0" role="button" aria-label="Book Upstairs double">
+          <span class="book-cta">Book</span>
           <div class="bg"><img src="/cabin-tiedye.jpg" alt="Double upstairs cabin"/></div>
           <div>
             <div class="tag">double · 03</div>
             <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Upstairs <em>double</em>.</h3>
-            <div class="price">le 2,000 <em>· $90</em></div>
+            <div class="price">Le 2,000 <em>· per night</em></div>
           </div>
         </article>
 
         <!-- Double downstairs -->
-        <article class="rm-card rm-sq">
+        <article class="rm-card rm-sq" data-book-room="downstairs-double" tabindex="0" role="button" aria-label="Book Downstairs double">
+          <span class="book-cta">Book</span>
           <div class="bg"><img src="/cabin-evening.jpg" alt="Double downstairs cabin"/></div>
           <div>
             <div class="tag">double · 04</div>
             <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Downstairs <em>double</em>.</h3>
-            <div class="price">le 1,500 <em>· $60</em></div>
+            <div class="price">Le 1,500 <em>· per night</em></div>
           </div>
         </article>
 
         <!-- Single -->
-        <article class="rm-card rm-sq">
+        <article class="rm-card rm-sq" data-book-room="single-cabin" tabindex="0" role="button" aria-label="Book Single cabin">
+          <span class="book-cta">Book</span>
           <div class="bg"><img src="/cabin-tiedye-2.jpg" alt="Single cabin"/></div>
           <div>
             <div class="tag">single · 05</div>
             <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Single <em>cabin</em>.</h3>
-            <div class="price">le 2,500 <em>· $110</em></div>
+            <div class="price">Le 2,500 <em>· per night</em></div>
           </div>
         </article>
       </div>
 
       <div class="mt-8 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] opacity-60">
-        <span>rates per night · WhatsApp to book</span>
-        <a class="ulink" href="mailto:Bondumaniart20@gmail.com">Bondumaniart20@gmail.com →</a>
+        <span>rates per night · pay securely online via flot</span>
+        <button class="ulink" data-open-booking style="background:none;border:none;padding:0;cursor:pointer;font:inherit;color:inherit">reserve any room →</button>
       </div>
     </div>
   </section>
@@ -716,9 +920,12 @@
       <p class="font-script text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mt-5 sm:mt-6 opacity-85">Reception answers 24 / 7. Tell us the dates, the number of guests, and whether you want a floating lunch or a river massage on arrival. We'll arrange the rest.</p>
 
       <div class="flex flex-wrap gap-3 justify-center mt-8 sm:mt-10">
+        <button class="btn walnut" data-open-booking>
+          Reserve &amp; pay online
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         <a class="btn" href="https://wa.me/23276403799" target="_blank" rel="noopener">WhatsApp +232 76 403 799</a>
         <a class="btn ghost" href="mailto:Bondumaniart20@gmail.com">Email reception</a>
-        <a class="btn ghost" href="https://www.instagram.com/bondumani_bamboo_village" target="_blank" rel="noopener">@bondumani_bamboo_village</a>
       </div>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t text-left" style="border-color:rgba(14,26,19,0.12)">
@@ -789,6 +996,131 @@
       <div>Built and Powered by <a class="ulink" href="https://www.flotme.ai/business" target="_blank" rel="noopener">Flot</a></div>
     </div>
   </footer>
+
+  <!-- BOOKING DRAWER -->
+  <aside id="booking-drawer" class="bk-drawer" aria-hidden="true">
+    <div class="bk-backdrop" data-close-booking></div>
+    <div class="bk-panel" role="dialog" aria-label="Reserve a stay">
+      <header class="bk-header">
+        <div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] opacity-60">Reserve</div>
+          <div class="font-display text-2xl mt-1">Bondumani <em class="font-script" style="color:var(--green)">Bamboo Village</em></div>
+        </div>
+        <button class="bk-close" data-close-booking aria-label="Close booking">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+
+      <form class="bk-body" data-booking-form novalidate>
+
+        <!-- Step 01 · Room -->
+        <section class="bk-section">
+          <div class="bk-section-head">
+            <span>Step 01</span><span>Choose a room</span>
+          </div>
+          <h4 class="font-display" style="font-size:1.2rem;letter-spacing:-0.02em">Where will you sleep?</h4>
+          <div class="bk-rooms" data-bk-rooms></div>
+        </section>
+
+        <!-- Step 02 · Dates & guests -->
+        <section class="bk-section">
+          <div class="bk-section-head">
+            <span>Step 02</span><span>Dates &amp; guests</span>
+          </div>
+          <div class="bk-grid-2">
+            <label class="bk-field">
+              <span>Check-in</span>
+              <input type="date" name="checkin" class="bk-input" required/>
+            </label>
+            <label class="bk-field">
+              <span>Check-out</span>
+              <input type="date" name="checkout" class="bk-input" required/>
+            </label>
+          </div>
+          <div class="bk-field mt-3">
+            <span>Guests</span>
+            <div class="bk-stepper">
+              <button type="button" data-guests="-" aria-label="Fewer guests">−</button>
+              <span class="v" data-guests-val>2</span>
+              <button type="button" data-guests="+" aria-label="More guests">+</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 03 · Experiences -->
+        <section class="bk-section">
+          <div class="bk-section-head">
+            <span>Step 03</span><span>Optional</span>
+          </div>
+          <h4 class="font-display" style="font-size:1.2rem;letter-spacing:-0.02em">Add experiences</h4>
+          <div class="bk-experiences mt-2" data-bk-experiences></div>
+        </section>
+
+        <!-- Step 04 · Customer -->
+        <section class="bk-section">
+          <div class="bk-section-head">
+            <span>Step 04</span><span>Your details</span>
+          </div>
+          <div class="bk-grid-2">
+            <label class="bk-field">
+              <span>Full name</span>
+              <input type="text" name="name" class="bk-input" required autocomplete="name" placeholder="e.g. Aminata Kamara"/>
+            </label>
+            <label class="bk-field">
+              <span>Phone</span>
+              <input type="tel" name="phone" class="bk-input" required autocomplete="tel" placeholder="+232 76 …"/>
+            </label>
+          </div>
+          <label class="bk-field mt-3">
+            <span>Email <span style="opacity:0.5;font-weight:400">(optional)</span></span>
+            <input type="email" name="email" class="bk-input" autocomplete="email" placeholder="you@example.com"/>
+          </label>
+          <label class="bk-field mt-3">
+            <span>Notes <span style="opacity:0.5;font-weight:400">(arrival time, dietary, etc.)</span></span>
+            <textarea name="notes" class="bk-input" rows="2" placeholder="Anything we should know before arrival…"></textarea>
+          </label>
+        </section>
+
+      </form>
+
+      <footer class="bk-footer">
+        <div class="bk-summary" data-bk-summary>
+          <div class="bk-summary-row"><span data-bk-room-line>Choose a room above</span><span></span></div>
+        </div>
+        <div class="bk-summary-total">
+          <div>
+            <div class="lbl">Total due now</div>
+            <div class="val mt-1" data-bk-total>Le 0</div>
+          </div>
+          <div class="font-mono text-[9px] uppercase tracking-[0.18em] opacity-55 text-right" data-bk-nights>0 nights</div>
+        </div>
+        <button type="button" class="btn walnut mt-4" data-bk-checkout>
+          Reserve &amp; pay
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="font-mono text-[9px] uppercase tracking-[0.18em] opacity-55 text-center mt-3">secure checkout · powered by <a class="ulink" href="https://www.flotme.ai" target="_blank" rel="noopener">flot</a></p>
+      </footer>
+    </div>
+  </aside>
+
+  <!-- FLOT CHECKOUT MODAL -->
+  <div id="checkout-modal" class="checkout-modal" aria-hidden="true">
+    <div class="checkout-backdrop" data-close-checkout></div>
+    <div class="checkout-dialog" role="dialog" aria-label="Flot secure checkout">
+      <div class="checkout-bar">
+        <div class="lbl">Secure checkout · <strong>flot</strong> · <span data-checkout-total>Le 0</span></div>
+        <div class="flex items-center gap-2">
+          <a class="ulink font-mono text-[10px]" data-checkout-whatsapp href="#" target="_blank" rel="noopener">share booking via whatsapp</a>
+          <button class="checkout-close" data-close-checkout aria-label="Close checkout">×</button>
+        </div>
+      </div>
+      <div class="checkout-frame-wrap">
+        <div class="checkout-loading" data-checkout-loading><div class="spinner"></div><div>Loading checkout…</div></div>
+        <iframe id="checkout-frame" src="about:blank" allow="payment" title="Flot secure checkout"></iframe>
+        <div class="checkout-fallback">popup blocked? <a data-checkout-fallback href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">open in a new tab →</a></div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
