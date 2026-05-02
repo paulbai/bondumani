@@ -345,12 +345,13 @@
     transition:background .25s, transform .25s;
   }
   .checkout-close:hover{background:var(--green-deep);transform:rotate(90deg)}
-  .checkout-frame-wrap{position:relative;width:100%;height:calc(100% - 56px);background:var(--paper)}
+  .checkout-dialog{display:flex;flex-direction:column}
+  .checkout-frame-wrap{position:relative;flex:1;width:100%;background:var(--paper);min-height:0}
   .checkout-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
   .checkout-loading{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
     color:var(--ink);font-family:'Geist',sans-serif;font-size:13px;pointer-events:none;
-    transition:opacity .3s ease;
+    transition:opacity .3s ease;background:var(--paper);
   }
   .checkout-loading.hide{opacity:0}
   .checkout-loading .spinner{
@@ -358,13 +359,20 @@
     border:2.5px solid rgba(58,90,63,0.18);border-top-color:var(--green);
     animation:spin 0.9s linear infinite;
   }
-  .checkout-fallback{
-    position:absolute;left:0;right:0;bottom:12px;text-align:center;
+  .checkout-foot{
+    flex:none;text-align:center;padding:10px 14px;
+    background:var(--paper);border-top:1px solid rgba(14,26,19,0.08);
     font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
-    color:var(--ink);opacity:0.55;
+    color:var(--ink);opacity:0.7;
   }
-  .checkout-fallback a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+  .checkout-foot a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
   body.checkout-open,body.bk-open{overflow:hidden}
+
+  /* Reserve & pay button disabled state */
+  .btn[disabled],.btn[aria-disabled="true"]{
+    opacity:0.45;cursor:not-allowed;pointer-events:none;
+    filter:saturate(0.6);
+  }
 
   @media (max-width:560px){.bk-panel{width:100vw}.bk-grid-2{grid-template-columns:1fr}}
 </style>
@@ -1094,8 +1102,8 @@
           </div>
           <div class="font-mono text-[9px] uppercase tracking-[0.18em] opacity-55 text-right" data-bk-nights>0 nights</div>
         </div>
-        <button type="button" class="btn walnut mt-4" data-bk-checkout>
-          Reserve &amp; pay
+        <button type="button" class="btn walnut mt-4" data-bk-checkout disabled aria-disabled="true">
+          <span data-bk-cta-label>Choose a room first</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <p class="font-mono text-[9px] uppercase tracking-[0.18em] opacity-55 text-center mt-3">secure checkout · powered by <a class="ulink" href="https://www.flotme.ai" target="_blank" rel="noopener">flot</a></p>
@@ -1115,10 +1123,10 @@
         </div>
       </div>
       <div class="checkout-frame-wrap">
-        <div class="checkout-loading" data-checkout-loading><div class="spinner"></div><div>Loading checkout…</div></div>
         <iframe id="checkout-frame" src="about:blank" allow="payment" title="Flot secure checkout"></iframe>
-        <div class="checkout-fallback">popup blocked? <a data-checkout-fallback href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">open in a new tab →</a></div>
+        <div class="checkout-loading" data-checkout-loading><div class="spinner"></div><div>Loading checkout…</div></div>
       </div>
+      <div class="checkout-foot">trouble loading? <a data-checkout-fallback href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">open in a new tab →</a></div>
     </div>
   </div>
 

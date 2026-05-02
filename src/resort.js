@@ -178,6 +178,27 @@ function renderSummary() {
     ? `${nights} ${nights === 1 ? 'night' : 'nights'} · ${booking.guests} ${booking.guests === 1 ? 'guest' : 'guests'}`
     : `${booking.guests} ${booking.guests === 1 ? 'guest' : 'guests'}`;
 
+  // enable/disable Reserve & pay
+  const checkoutBtn = document.querySelector('[data-bk-checkout]');
+  if (checkoutBtn) {
+    const ready = !!room && nights > 0 && !!booking.checkin && !!booking.checkout;
+    if (ready) {
+      checkoutBtn.removeAttribute('disabled');
+      checkoutBtn.removeAttribute('aria-disabled');
+      const lbl = checkoutBtn.querySelector('[data-bk-cta-label]');
+      if (lbl) lbl.textContent = 'Reserve & pay';
+    } else {
+      checkoutBtn.setAttribute('disabled', 'true');
+      checkoutBtn.setAttribute('aria-disabled', 'true');
+      const lbl = checkoutBtn.querySelector('[data-bk-cta-label]');
+      if (lbl) {
+        if (!room) lbl.textContent = 'Choose a room first';
+        else if (nights <= 0) lbl.textContent = 'Select your dates';
+        else lbl.textContent = 'Reserve & pay';
+      }
+    }
+  }
+
   return total;
 }
 

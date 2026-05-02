@@ -180,12 +180,13 @@
     transition:background .25s, transform .25s;
   }
   .checkout-close:hover{background:var(--purple);transform:rotate(90deg)}
-  .checkout-frame-wrap{position:relative;width:100%;height:calc(100% - 56px);background:#faf6e7}
+  .checkout-dialog{display:flex;flex-direction:column}
+  .checkout-frame-wrap{position:relative;flex:1;width:100%;background:#faf6e7;min-height:0}
   .checkout-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
   .checkout-loading{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
     color:var(--ink);font-family:'Geist',sans-serif;font-size:13px;pointer-events:none;
-    transition:opacity .3s ease;
+    transition:opacity .3s ease;background:#faf6e7;
   }
   .checkout-loading.hide{opacity:0}
   .checkout-loading .spinner{
@@ -193,12 +194,13 @@
     border:2.5px solid rgba(75,31,122,0.18);border-top-color:var(--purple);
     animation:spin 0.9s linear infinite;
   }
-  .checkout-fallback{
-    position:absolute;left:0;right:0;bottom:12px;text-align:center;
+  .checkout-foot{
+    flex:none;text-align:center;padding:10px 14px;
+    background:var(--cream);border-top:1px solid rgba(20,10,31,0.08);
     font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
-    color:var(--ink);opacity:0.55;
+    color:var(--ink);opacity:0.7;
   }
-  .checkout-fallback a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}
+  .checkout-foot a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}
   body.checkout-open{overflow:hidden}
 
   /* header cart icon */
@@ -1153,10 +1155,10 @@
         </div>
       </div>
       <div class="checkout-frame-wrap">
-        <div class="checkout-loading" data-checkout-loading><div class="spinner"></div><div>Loading checkout…</div></div>
         <iframe id="checkout-frame" src="about:blank" allow="payment" title="Flot secure checkout"></iframe>
-        <div class="checkout-fallback">popup blocked? <a data-checkout-fallback href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">open in a new tab →</a></div>
+        <div class="checkout-loading" data-checkout-loading><div class="spinner"></div><div>Loading checkout…</div></div>
       </div>
+      <div class="checkout-foot">trouble loading? <a data-checkout-fallback href="https://pay.flotme.ai/bondumaniart" target="_blank" rel="noopener">open in a new tab →</a></div>
     </div>
   </div>
 
