@@ -107,6 +107,10 @@
   .market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   @media (max-width:900px){.market-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
   @media (max-width:520px){.market-grid{grid-template-columns:1fr;gap:14px}}
+  /* keep marketplace cards visible regardless of scroll position
+     (defensive against any cached JS that may still set inline opacity / transform) */
+  .market-grid .market-card{opacity:1 !important;transform:none !important}
+  .market-grid .market-card:hover{transform:translateY(-4px) !important}
 
   .market-card{
     position:relative;background:var(--cream);border-radius:18px;overflow:hidden;
