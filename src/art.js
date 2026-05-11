@@ -45,17 +45,8 @@ gsap.utils.toArray('.art-img').forEach((img, i) => {
   });
 });
 
-/* marketplace card scroll reveal */
-gsap.utils.toArray('.market-card').forEach((card, i) => {
-  gsap.from(card, {
-    y: 60,
-    opacity: 0,
-    duration: 0.9,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: card, start: 'top 92%', once: true },
-    delay: (i % 3) * 0.06
-  });
-});
+/* marketplace cards — always visible (no reveal animation
+   to avoid GSAP from-state sticking when users scroll back up) */
 
 /* ---------- CART + CHECKOUT ---------- */
 const FLOT_BASE = 'https://pay.flotme.ai/bondumaniart';
