@@ -72,3 +72,12 @@ export function introVeil(id = 'intro') {
     gsap.to(veil, { opacity: 0, duration: 0.75, ease: 'power3.out', onComplete: () => veil.remove() });
   });
 }
+
+/* Replace every [data-current-year] span with the current year so the
+   footer copyright rolls over automatically each new year. */
+(function setCurrentYear() {
+  const year = String(new Date().getFullYear());
+  document.querySelectorAll('[data-current-year]').forEach((el) => {
+    el.textContent = year;
+  });
+})();
